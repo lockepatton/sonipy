@@ -1,0 +1,249 @@
+C4 = 261.6  # Hz
+piano_max = 4186.01  # Hz
+piano_min = 27.5000  # Hz - not audible
+
+import warnings
+warnings.simplefilter("ignore")
+
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+import thinkdsp
+from pydub.generators import Sine
+from scipy.interpolate import interp1d
+
+def cent_per_value(f_min, f_max, v_min, v_max):
+    step = 1200 * np.log2(f_max / f_min)  / (v_max - v_min)
+    return step
+
+def get_f_min(f_max, cents_per_value, v_min, v_max):
+    f_min = f_max / ( 2 ** ((v_max - v_min) * cents_per_value / 1200))
+    return f_min
+
+class FrequencyScale(object):
+    """Class for Frequency Scale Design"""
+
+    def __init__(self, frequency_min=None, frequency_max=C4 * 4, cents_per_value=None,
+                 value_min=0, value_max=1, verbose=False):
+
+        if verbose:
+            print('initial vals (fmin, fmax, vmin, vmax):',frequency_min, frequency_max, value_min, value_max)
+
+        # defining cents_per_value
+        if (cents_per_value == None):
+            self.cents_per_value = cent_per_value(frequency_min, frequency_max,
+                                                  value_min, value_max)
+        else:
+            self.cents_per_value = cents_per_value
+
+        if verbose:
+            print('self.cents_per_value',self.cents_per_value)
+
+        # defining frequency_min
+        self.value_min = value_min
+        self.value_max = value_max
+        self.frequency_max = frequency_max
+        self.frequency_min = get_f_min(self.frequency_max, self.cents_per_value, self.value_min, self.value_max)
+
+
+        if verbose:
+            print('initial vals:',self.frequency_min,self.frequency_max, self.value_min, self.value_max)
+
+        freq = lambda v : self.frequency_min * 2 ** ((v - self.value_min) * self.cents_per_value / 1200)
+        self.freq_translate_to_range = lambda array : list(map(freq, array))
+
+        if verbose:
+            print('Frequency Scale Built')
+
+
+def from_max_ms(times, time_max):
+    dt = np.subtract(times[1:], times[0:-1])
+    dt_max = max(dt)
+    scale = dt_max / time_max  # MJD / ms
+    return scale
+
+
+def from_min_ms(times, time_min):
+    dt = np.subtract(times[1:], times[0:-1])
+    dt_min = np.min(dt[np.nonzero(dt)])  # min(dt)
+    scale = dt_min / time_min  # MJD / ms
+    return scale
+
+
+def from_total_ms(times, time_total):
+    dt_total = abs(times[0] - times[-1])
+    scale = dt_total / time_total  # MJD / ms
+    return scale
+
+
+def getScale(times, time_total=None, time_min=None, time_max=None):
+    if time_total is not None:
+        scale = from_total_ms(times, time_total)
+        time_total = time_total
+    if time_max is not None:
+        scale = from_max_ms(times, time_max)
+        time_max = time_max
+    if time_min is not None:
+        scale = from_min_ms(times, time_min)
+        time_min = time_min
+    if scale==0:
+        raise ("Time scale is 0.")
+    try:
+        return scale
+    except:
+        raise "error: need to define time_total, time_max, or time_min to find time scale"
+
+
+class DurationsScale(object):
+    """Class for Duration Scale"""
+
+    def __init__(self, scale):
+        self.scale = scale
+
+    def getDurations(self, times):
+        """Calculates millisecond pitch durations for variable data, based upon deltas between array values"""
+        self.times = times
+        self.dt = np.subtract(self.times[1:], self.times[0:-1])
+        self.dt_min, self.dt_max = np.min(
+            self.dt[np.nonzero(self.dt)]), max(self.dt)
+        # print (self.dt, self.scale)
+        # print (self.dt * self.scale)
+
+        self.time_min, self.time_max = self.dt_min * \
+            self.scale, self.dt_max * self.scale
+
+        # last signal = longest signal time
+        self.durations = np.append(
+            self.dt / self.scale, [self.time_max * self.scale])
+        # print (self.durations)
+        # m = interp1d([self.dt_min, self.dt_max], [self.time_min, self.time_max])
+        # self.durations = np.append(m(self.dt), [self.time_max]) #last signal = longest signal time
+        return self.durations
+
+    def printEdgeCases(self):
+        """Prints edge cases to help user understand time and sound min/max changes"""
+        print ('min/max d(time) values',self.dt_min, self.dt_max)
+        print ('min/max sound durations (ms)',self.time_min, self.time_max)
+
+    def plotDurations(self, bins=100):
+        fig, ax = plt.subplots(1, 1)
+        ax.hist(self.durations, bins=bins)
+        fig.show()
+        return fig, ax
+
+
+class StringTone(FrequencyScale):
+    """Class for Building String Tones and Saving Audio Files"""
+
+    def __init__(self, durations, values, fadetime=100, **kwargs):
+        super(StringTone, self).__init__(**kwargs)
+
+        self.values = values
+        self.durations = durations
+        self.frequencies = self.freq_translate_to_range(self.values)
+        # print('frequencies',self.frequencies)
+
+        def createSineTones(f, d):
+            return Sine(f).to_audio_segment(duration=d).fade_in(fadetime / 2).fade_out(fadetime / 2)
+
+        self.stringtones = map(createSineTones, self.frequencies, self.durations)
+        self.stringtone = sum(self.stringtones)
+        print ('stringtone created')
+
+    def SaveTone(self, path='.', filename='stringtone.mp4'):
+        """Saves .mp4 file from stringtone system."""
+
+        self.filepath = os.path.join(path, 'tones/')
+
+        if os.path.exists(path):
+            if not os.path.exists(self.filepath):
+                os.makedirs(self.filepath)
+
+            fullfilepath = os.path.join(self.filepath, filename)
+            self.stringtone.export(fullfilepath, format="mp4")
+            print('Saved stringtone as %s.' % fullfilepath)
+        else:
+            raise('path does not exist.')
+
+
+class MultiTone(FrequencyScale):
+    """Class for Building Multiples Frequencies Tones and Saving Audio Files"""
+
+    def __init__(self, durations, values, length=.5, fade=True, **kwargs):
+        super(MultiTone, self).__init__(**kwargs)
+
+        def runningSum(durations):
+            return np.cumsum(durations)
+
+        self.values = values
+        self.durations = durations
+        self.starttimes = runningSum(self.durations) / 1000
+
+        self.frequencies = self.freq_translate_to_range(self.values)
+        # print('frequencies',self.frequencies)
+        # print('starttimes',self.starttimes)
+
+
+        if fade:
+            def createBlip(f, s):
+                cos_sig = thinkdsp.CosSignal(freq=f, amp=1.0, offset=0)
+                wave = cos_sig.make_wave(duration=length, start=s)
+                waveyslen = len(wave.ys)
+                cut = int(waveyslen/3)
+                scalearray = np.append(np.linspace(0,1,cut)**.25, np.linspace(1,0,waveyslen-cut))
+                wave.ys = [w * scale for w, scale in zip(wave.ys,scalearray)]
+                return wave
+
+        else:
+            def createBlip(f, s):
+                cos_sig = thinkdsp.CosSignal(freq=f, amp=1.0, offset=0)
+                return cos_sig.make_wave(duration=length, start=s)
+
+        # print (self.starttimes)
+
+        self.multitones = map(createBlip, self.frequencies, self.starttimes)
+        self.multitone = sum(self.multitones)
+        print ('multitones created')
+
+    def SaveTone(self, path='.', filename='multitone.wav'):
+        """Saves .wav file from multitone system."""
+
+        self.filepath = os.path.join(path, 'tones/')
+
+        if os.path.exists(path):
+            if not os.path.exists(self.filepath):
+                os.makedirs(self.filepath)
+
+            fullfilepath = os.path.join(self.filepath, filename)
+            self.multitone.write(fullfilepath)
+            print('Saved multitone as %s.' % fullfilepath)
+        else:
+            raise('path does not exist.')
+
+def SonifyTool(values, times, frequency_args, duration_args=None, duration_scale=None, length=.1):
+
+    values, times = np.array(values), np.array(times)
+
+    # determining time scale
+    if duration_scale != None:
+        scale = duration_scale
+    elif duration_scale == None:
+        scale = getScale(times=times, **duration_args)
+    else:
+        raise "Time scale must be defined by duration_scale or within duration_args"
+
+    # calculation Durations between tone events
+    DurScale = DurationsScale(scale)
+    durations = DurScale.getDurations(times=times)
+
+    # Frequency Default Arguments
+    # If value_min or value_max unspecified, defaulting to max/min of 'values'
+    if 'value_min' not in frequency_args:
+        frequency_args['value_min'] = min(values)
+    if 'value_max' not in frequency_args:
+        frequency_args['value_max'] = max(values)
+
+    # creating multitone
+    Tone = MultiTone(values=values, durations=durations, length=length, **frequency_args)
+
+    return Tone
