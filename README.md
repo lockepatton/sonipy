@@ -1,6 +1,8 @@
 # `sonipy` : A Scatterplot Sonification Package
 
-A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible. This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque). Click [here](https://twitter.com/Astro_Locke/status/1083510515857408000) for a twitter thread explaining the motivation behind this project.
+A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible.
+
+This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque). Click [here](https://twitter.com/Astro_Locke/status/1083510515857408000) for a twitter thread explaining the motivation behind this project.
 
 ## What does `sonipy` do?
 
