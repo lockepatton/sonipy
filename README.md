@@ -8,36 +8,42 @@ Our method of sonification takes in scatterplot data and produces audio clips th
 
 ![sonipy setup](./paper/images/Method2.png)
 
-
 **Each data point has a corresponding short tone called a `blip`,** with a y value corresponding to its pitch and a x value corresponding to its arrival time.
-
-### The pitch of the blip corresponds to its y values
-
-A completely well-defined y frequency scale has the following parameters:
-
-
-1. a minimum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{min}">and it's corresponding minimum y value <img src="https://render.githubusercontent.com/render/math?math=y_{min}">
-2. a maximum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{max}"> and it's corresponding maximum y value <img src="https://render.githubusercontent.com/render/math?math=y_{max}">
-3. a change in pitch (measured in [cents](https://en.wikipedia.org/wiki/Cent_(music))) over change in y value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dc}{dy}">
-
-We relate any given y value to it's corresponding frequency via:
-
-<img src="https://render.githubusercontent.com/render/math?math=f = \frac{f_{max}}{2^{\frac{dc}{dy} [y_{max} - y] ~/~ 1200}}">
-
-### The arrival time of the blip corresponds to its x value
-
-A completely well-defined x time scale has the following parameters:
-
-1. a minimum x value $x_{min}$
-2. a maximum x value $x_{max}$
-3. a total time of the soundfile $t_{total}$
-4. a change in time (measured in seconds) over change in x value parameter $\frac{dt}{dx}$
-
-$$ t = \frac{dt}{dx} [x - x_{min}]$$
-
 
 ## Installation
 
 `pip install sonipy`
 
 ## Example Easy Setup
+
+``` Python
+from sonify import *
+
+C4 = 261.6 # Hz
+args = {'frequency_min' : C4,
+        'frequency_max' : C4*4,
+        # 'cents_per_value' : -680,
+        'value_min' : 0,
+        'value_max' : 1}
+
+SN = MultiTone(values=x, durations=y,
+               length=0.5, **args)
+SN.SaveTone()
+```
+
+## Parameter Inputs
+
+### Frequency Scale Parameters:
+
+1. a minimum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{min}"> and it's corresponding minimum y value <img src="https://render.githubusercontent.com/render/math?math=y_{min}">
+2. a maximum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{max}"> and it's corresponding maximum y value <img src="https://render.githubusercontent.com/render/math?math=y_{max}">
+3. a change in pitch (measured in [cents](https://en.wikipedia.org/wiki/Cent_(music))) over change in y value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dc}{dy}">
+
+### Time Scale Parameters:
+
+1. a total time of the soundfile <img src="https://render.githubusercontent.com/render/math?math=t_{total}">
+2. a change in time (measured in seconds) over change in x value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dt}{dx}">
+
+## Demos
+Several Jupyter notebooks that demonstrate some use cases and examples of sonipy are found
+[here](https://github.com/lockepatton/sonipy/tree/master/demos).
