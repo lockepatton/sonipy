@@ -1,4 +1,4 @@
-# `sonipy` : A Perceptually Uniform Scatterplot Sonification Package
+# `sonipy` : A Scatterplot Sonification Package
 
 A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible.
 
@@ -15,14 +15,14 @@ Our method of sonification takes in scatterplot data and produces audio clips th
 
 A completely well-defined y frequency scale has the following parameters:
 
-1. a minimum frequency $f_{min}$ and it's corresponding minimum y value $y_{min}$
-2. a maximum frequency $f_{max}$ and it's corresponding maximum y value $y_{min}$
-3. a change in pitch (measured in [cents](https://en.wikipedia.org/wiki/Cent_(music))) over change in y value parameter $\frac{dc}{dy}$
+
+1. a minimum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{min}">and it's corresponding minimum y value <img src="https://render.githubusercontent.com/render/math?math=y_{min}">
+2. a maximum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{max}"> and it's corresponding maximum y value <img src="https://render.githubusercontent.com/render/math?math=y_{max}">
+3. a change in pitch (measured in [cents](https://en.wikipedia.org/wiki/Cent_(music))) over change in y value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dc}{dy}">
 
 We relate any given y value to it's corresponding frequency via:
 
-$$ f = \frac{f_{max}}{2^{\frac{dc}{dy} [y_{max} - y] ~/~ 1200}} $$
-
+<img src="https://render.githubusercontent.com/render/math?math=f = \frac{f_{max}}{2^{\frac{dc}{dy} [y_{max} - y] ~/~ 1200}}">
 
 ### The arrival time of the blip corresponds to its x value
 
@@ -39,3 +39,5 @@ $$ t = \frac{dt}{dx} [x - x_{min}]$$
 ## Installation
 
 `pip install sonipy`
+
+## Example Easy Setup
