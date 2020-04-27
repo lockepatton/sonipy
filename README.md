@@ -100,3 +100,7 @@ Several Jupyter notebooks that demonstrate some use cases and examples of sonipy
 ## TransientZoo Motivation
 
 This  code  was  developed  as  part  of  TransientZoo,  a  citizen  science  program  that  will  allow  participants,  including  blind and visually impaired individuals, to classify supernova lightcurves using sound. In astronomy, lightcurves depict variations in brightness of a specific astrophysical object as a function of time. For more, see [this summary](https://twitter.com/Astro_Locke/status/1083510515857408000) twitter thread and poster from the 235th American Astronomical Meeting.
+
+## Attribution
+
+If you find the package useful in your research, please cite our JOSS paper.
