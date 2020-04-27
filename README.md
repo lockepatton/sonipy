@@ -1,10 +1,10 @@
 # `sonipy` : A Scatterplot Sonification Package
 
-A package to turn scatter plots into perceptually uniform sound files like [this one](https://twitter.com/Astro_Locke/status/1083510562187751424) for use in science and to make science more accessible.
-
-This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque). Click [here](https://twitter.com/Astro_Locke/status/1083510515857408000) for a twitter thread explaining the motivation behind this project.
+A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible. This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque). Click [here](https://twitter.com/Astro_Locke/status/1083510515857408000) for a twitter thread explaining the motivation behind this project.
 
 ## What does `sonipy` do?
+
+[Here](https://twitter.com/Astro_Locke/status/1083510562187751424) is an example sonification.
 
 Our method of sonification takes in scatterplot data and produces audio clips that depict each datapoint as a short sound blip with a y value corresponding to pitch and an x value corresponding to arrival time.
 
