@@ -14,13 +14,17 @@ Our method of sonification takes in scatterplot data and produces audio clips th
 
 `sonipy` is pip-installable from command line:
 
-`pip install sonipy`
+``` bash
+pip install sonipy
+```
 
 Alternately, you can clone the repository and install it yourself:
 
-`git clone https://github.com/lockepatton/sonipy.git`
-`cd sonipy`
-`python setup.py install`
+``` bash
+git clone https://github.com/lockepatton/sonipy.git
+cd sonipy
+python setup.py install
+```
 
 
 ## Example Easy Setup
