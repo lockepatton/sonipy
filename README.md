@@ -8,7 +8,7 @@ Our method of sonification takes in scatterplot data and produces audio clips th
 
 ![sonipy setup](./paper/images/Method2.png)
 
-**Each data point has a corresponding short tone called a `blip`,** with a y value corresponding to its pitch and a x value corresponding to its arrival time.
+**Each data point has a corresponding short tone called a `blip`,** with a y value corresponding to its pitch and a x value corresponding to its arrival time. Higher y value data points have higher corresponding blip pitches.
 
 ## Installation
 
