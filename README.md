@@ -6,7 +6,7 @@ This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) an
 
 ## What does `sonipy` do?
 
-[Here](https://twitter.com/Astro_Locke/status/1083510562187751424) is an example sonification.
+Here is an [example sonification](https://twitter.com/Astro_Locke/status/1083510562187751424).
 
 Our method of sonification takes in scatterplot data and produces audio clips that depict each datapoint as a short sound blip with a y value corresponding to pitch and an x value corresponding to arrival time.
 
