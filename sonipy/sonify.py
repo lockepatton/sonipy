@@ -68,7 +68,7 @@ class FrequencyScale(object):
         - frequency min, frequency max, y value min and y value max
         - frequency_max, cents_per_value, y value min and y value max
     Both of these options will match the maximum frequency to the maximum value.
-
+    Cents are a logarithmic unit of tone intervals (https://en.wikipedia.org/wiki/Cent_(music)).
 
     Parameters
     ----------
@@ -285,7 +285,7 @@ class DurationsScale(object):
         print ('min/max d(time) values\t', self.dt_min, self.dt_max)
         print ('min/max sound durations (ms)\t',self.time_min, self.time_max)
 
-    def plotDurations(self, bins=100, figsize=(6,6), args):
+    def plotDurations(self, bins=100, kwargs={}):
         """
         Plots histogram of time duration between succesive blips (in ms).
 
@@ -302,8 +302,8 @@ class DurationsScale(object):
             Matplotlib fig, ax.
 
         """
-        fig, ax = plt.subplots(1, 1, figsize=figsize)
-        ax.hist(self.durations, bins=bins, *args)
+        fig, ax = plt.subplots(1, 1)
+        ax.hist(self.durations, bins=bins, **kwargs)
         fig.show()
         return fig, ax
 
@@ -442,7 +442,7 @@ class MultiTone(FrequencyScale):
         else:
             raise('Path does not exist.')
 
-def SonifyTool(values, times, frequency_args, duration_args=None, duration_scale=None, length=.1):
+def SonifyTool(values, times, frequency_args={"frequency_min" : C4, "frequency_max" : 4*C4 }, duration_args={"time_total" : 2}, duration_scale=None, length=.1):
     """
     This is a built-in-one sonification tool for creating a MultiTone.
 
@@ -461,7 +461,7 @@ def SonifyTool(values, times, frequency_args, duration_args=None, duration_scale
     times : arr
         Array of x positions that will correspond to blip times.
     frequency_args : dictionary
-        Dictionary with pitch y value arguments (frequency_min, frequency_max, cents_per_value, value_min, value_max).
+        Dictionary with pitch y value arguments (frequency_min, frequency_max, cents_per_value, value_min, value_max). Defaults to min of C4 and max of four times C4.
     duration_args : dictionary
         Dictionary with duration x value arguments  (time_total, time_min, or time_max).
     duration_scale : float
