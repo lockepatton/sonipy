@@ -34,13 +34,39 @@ from sonify import *
 
 C4 = 261.6 # Hz
 args = {'frequency_min' : C4,
-        'frequency_max' : C4*4,
-        # 'cents_per_value' : -680,
-        'value_min' : 0,
-        'value_max' : 1}
+        'frequency_max' : C4*4}
 
 SN = MultiTone(values=x, durations=y,
                length=0.5, **args)
+SN.SaveTone()
+```
+
+## Extended Setup
+
+``` Python
+from sonify import *
+
+C4 = 261.6 # Hz
+frequency_args = {
+  'frequency_min' : C4,
+  'frequency_max' : C4*4
+  # 'cents_per_value' : -680,
+  # 'value_min' : 0,
+  # 'value_max' : 1,
+}
+
+duration_args = {
+  'time_total' : 2,
+  # 'time_min' : None,
+  # 'time_max' : None,
+}
+duration_scale = None
+
+SN = SonifyTool(values=x, durations=y,
+                frequency_args = frequency_args,
+                duration_args = duration_args,
+                # duration_scale = duration_scale,
+                length=0.5, **args)
 SN.SaveTone()
 ```
 
