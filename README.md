@@ -1,8 +1,8 @@
 # `sonipy` : A Scatterplot Sonification Package
 
-A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible.
+A package to turn scatter plots into perceptually uniform sound files like [this one](https://twitter.com/Astro_Locke/status/1083510562187751424) for use in science and to make science more accessible.
 
-This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque).
+This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque). Click [here](https://twitter.com/Astro_Locke/status/1083510515857408000) for a twitter thread explaining the motivation behind this project.
 
 ## What does `sonipy` do?
 
@@ -98,5 +98,3 @@ Several Jupyter notebooks that demonstrate some use cases and examples of sonipy
 ## TransientZoo Motivation
 
 This  code  was  developed  as  part  of  TransientZoo,  a  citizen  science  program  that  will  allow  participants,  including  blind and visually impaired individuals, to classify supernova lightcurves using sound. In astronomy, lightcurves depict variations in brightness of a specific astrophysical object as a function of time.
-
-Click [here](https://twitter.com/Astro_Locke/status/1083510515857408000) a twitter thread explaining the motivation behind this project.
