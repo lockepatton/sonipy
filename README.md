@@ -2,6 +2,8 @@
 
 A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible.
 
+This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque).
+
 ## What does `sonipy` do?
 
 Our method of sonification takes in scatterplot data and produces audio clips that depict each datapoint as a short sound blip with a y value corresponding to pitch and an x value corresponding to arrival time.
@@ -66,7 +68,7 @@ SN = SonifyTool(values=x, durations=y,
                 frequency_args = frequency_args,
                 duration_args = duration_args,
                 # duration_scale = duration_scale,
-                length=0.5, **args)
+                length=0.5)
 SN.SaveTone()
 ```
 
@@ -92,3 +94,9 @@ Time parameters are entered by simply by defining a duration_scale (in seconds p
 ## Demos
 Several Jupyter notebooks that demonstrate some use cases and examples of sonipy are found
 [here](https://github.com/lockepatton/sonipy/tree/master/demos).
+
+## TransientZoo Motivation
+
+This  code  was  developed  as  part  of  TransientZoo,  a  citizen  science  program  that  will  allow  participants,  including  the  visually impaired, to classify supernova lightcurves using sound. In astronomy, lightcurves depict variations in brightness of a specific astrophysical object as a function of time.
+
+For a twitter thread explaining the motivation behind this project,
