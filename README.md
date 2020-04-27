@@ -6,7 +6,7 @@ A package to turn scatter plots into perceptually uniform sound files for use in
 
 Our method of sonification takes in scatterplot data and produces audio clips that depict each datapoint as a short sound blip with a y value corresponding to pitch and an x value corresponding to arrival time.
 
-![sonipy setup](/Users/lockepatton/sonipy/paper/images/Method2.png)
+![sonipy setup](./paper/images/Method2.png)
 
 
 **Each data point has a corresponding short tone called a `blip`,** with a y value corresponding to its pitch and a x value corresponding to its arrival time.
