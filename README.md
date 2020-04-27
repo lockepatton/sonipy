@@ -12,7 +12,16 @@ Our method of sonification takes in scatterplot data and produces audio clips th
 
 ## Installation
 
+`sonipy` is pip-installable from command line:
+
 `pip install sonipy`
+
+Alternately, you can clone the repository and install it yourself:
+
+`git clone https://github.com/lockepatton/sonipy.git`
+`cd sonipy`
+`python setup.py install`
+
 
 ## Example Easy Setup
 
@@ -39,10 +48,16 @@ SN.SaveTone()
 2. a maximum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{max}"> and it's corresponding maximum y value <img src="https://render.githubusercontent.com/render/math?math=y_{max}">
 3. a change in pitch (measured in [cents](https://en.wikipedia.org/wiki/Cent_(music))) over change in y value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dc}{dy}">
 
+All frequency parameters are entered inside the args parameter.
+
 ### Time Scale Parameters:
+
+By default, the sound files are 2 seconds.
 
 1. a total time of the soundfile <img src="https://render.githubusercontent.com/render/math?math=t_{total}">
 2. a change in time (measured in seconds) over change in x value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dt}{dx}">
+
+Time parameters are entered by simply by defining a duration_scale (in seconds per x value). Or alternately by passing a duration_args dictionary with some total time, smallest delta time between points or max delta time between points.
 
 ## Demos
 Several Jupyter notebooks that demonstrate some use cases and examples of sonipy are found
