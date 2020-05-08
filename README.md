@@ -34,10 +34,10 @@ python setup.py install
 ## Example Easy Setup
 
 ``` Python
-from sonipy import sonify
+from sonipy.sonify import SonifyTool
 
-Tone = sonify.SonifyTool(x, y)
-Tone.play(autoplay=True)
+Tone = SonifyTool(x, y)
+Tone.play()
 Tone.save()
 ```
 
@@ -61,7 +61,7 @@ duration_args = {
   # 'time_max' : 800, # ms
 }
 
-duration_scale = None # x value / time (ms)
+duration_scale = 1. / 2000. # x value / time (ms)
 
 Tone = SonifyTool(x, y,
                   frequency_args = frequency_args,
@@ -69,7 +69,7 @@ Tone = SonifyTool(x, y,
                   # duration_scale = duration_scale,
                   length=0.5)
 
-Tone.play(autoplay=True)
+Tone.play()
 Tone.SaveTone()
 ```
 
