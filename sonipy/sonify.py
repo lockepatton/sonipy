@@ -52,7 +52,7 @@ class MultiTone(FrequencyScale):
         Dictionary with pitch y value arguments (frequency_min, frequency_max, cents_per_value, value_min, value_max).
     """
 
-    def __init__(self, starttimes, values, length=.5, fade=True,
+    def __init__(self, starttimes, values, bliplength=.5, fade=True,
                  verbose=False, alertMultitoneCreated=True, **kwargs):
 
         if len(starttimes) != len(values):
@@ -96,7 +96,7 @@ class MultiTone(FrequencyScale):
             def createBlip(f, s):
                 """Generates blip with fade."""
                 cos_sig = thinkdsp.CosSignal(freq=f, amp=1.0, offset=0)
-                wave = cos_sig.make_wave(duration=length, start=s)
+                wave = cos_sig.make_wave(duration=bliplength, start=s)
                 waveyslen = len(wave.ys)
                 cut = int(waveyslen / 3)
                 scalearray = np.append(np.linspace(
@@ -108,8 +108,9 @@ class MultiTone(FrequencyScale):
             def createBlip(f, s):
                 """Generates blip."""
                 cos_sig = thinkdsp.CosSignal(freq=f, amp=1.0, offset=0)
-                return cos_sig.make_wave(duration=length, start=s)
+                return cos_sig.make_wave(duration=bliplength, start=s)
 
+        self.bliplength = bliplength
         self.multitones = map(
             createBlip, self.y_frequencies, self.x_starttimes)
 
@@ -197,7 +198,7 @@ class MultiTone(FrequencyScale):
 
 def SonifyTool(x, y,
                frequency_args={"frequency_min": C4, "frequency_max": 4 * C4},
-               duration_args={"time_total": 2. * s_to_ms}, duration_scale=None, length=.1, fade=True,
+               duration_args={"time_total": 2. * s_to_ms}, duration_scale=None, bliplength=.1, fade=True,
                alertMultitoneCreated=True, verbose=False):
     """
     This is a built-in-one sonification tool for creating a MultiTone.
@@ -208,7 +209,7 @@ def SonifyTool(x, y,
 
     To account for how x scales with time, it accepts a duration_scale in x value / time (ms). If a duration scale is not specified, it pays attention to a dictionary of duration_args. See the DurationsScale object and getScale() function for more info on your avaliable inputs (time_total, time_min, time_max).
 
-    Finally, you must specify the length you'd like each blip to last in seconds in the parameter length. Default is .1 seconds.
+    Finally, you must specify the length you'd like each blip to last in seconds in the parameter bliplength. Default is .1 seconds.
 
     Parameters
     ----------
@@ -222,7 +223,7 @@ def SonifyTool(x, y,
         Dictionary with duration x value arguments  (time_total, time_min, or time_max).
     duration_scale : float
         Scale argument for time axis (x value / time (ms)), as an alternate to duration_args input.
-    length : float
+    bliplength : float
         Duration of each blip in seconds.
     fade : bool
         Flag to toggle including fade on each blip. Recommended to include, especially when blips are dense.
@@ -284,7 +285,7 @@ def SonifyTool(x, y,
     starttimes = DurScale.getDurations(x=x)
 
     # creating multitone
-    Tone = MultiTone(values=y, starttimes=starttimes, length=length, verbose=verbose,
+    Tone = MultiTone(values=y, starttimes=starttimes, bliplength=bliplength, verbose=verbose,
                      alertMultitoneCreated=alertMultitoneCreated, **frequency_args)
 
     # Passing necisssary details to the Tone namespace

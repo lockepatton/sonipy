@@ -31,14 +31,14 @@ robustness_round_tolerence = 4
 s_to_ms = 1000.
 
 
-def createTone(x, values, length=.1, time_total=time_total, frequency_args=frequency_args):
+def createTone(x, values, bliplength=.1, time_total=time_total, frequency_args=frequency_args):
     """Runs code to create a multitone and calculate the scale"""
 
     scale = getScale(x=x, time_total=time_total)
     DurScale = DurationsScale(scale)
     starttimes = DurScale.getDurations(x=x)
 
-    return scale, MultiTone(values=values, starttimes=starttimes, length=length,
+    return scale, MultiTone(values=values, starttimes=starttimes, bliplength=bliplength,
                             alertMultitoneCreated=False, **frequency_args)
 
 
@@ -54,13 +54,13 @@ def starttimes_match_to_x_via_scale(self, x, values):
                            times_minus_min_times) <= robustness_diff)
 
 
-def tonelength_equals_total_time_plus_bliptime(self, x, values, length=.5):
+def tonelength_equals_total_time_plus_bliptime(self, x, values, bliplength=.5):
     """Test to see total time +  blip length ~ length of tone"""
 
-    scale, Tone = createTone(x, values, length=length)
+    scale, Tone = createTone(x, values, bliplength=bliplength)
 
     self.assertEqual(np.round(Tone.multitone.duration,
-                              robustness_round_tolerence), time_total / s_to_ms + length)
+                              robustness_round_tolerence), time_total / s_to_ms + bliplength)
 
 
 class TestMultiTone(TestCase):
@@ -96,12 +96,12 @@ class TestMultiTone(TestCase):
         # linear x and y
         x, values = x_lin, y_lin
         tonelength_equals_total_time_plus_bliptime(
-            self, x, values, length=.5)
+            self, x, values, bliplength=.5)
 
         # ordered random x, random y
         x, values = x_random_ordered, y_random_ordered
         tonelength_equals_total_time_plus_bliptime(
-            self, x, values, length=.5)
+            self, x, values, bliplength=.5)
 
     def test_vmin_vmax_not_finite_input(self):
         # test when value_max is given as -inf, nan
@@ -132,7 +132,7 @@ class TestMultiTone(TestCase):
         DurScale = DurationsScale(scale)
         starttimes = DurScale.getDurations(x=x)
 
-        MultiTone(values=values, starttimes=starttimes, length=0.3,
+        MultiTone(values=values, starttimes=starttimes, bliplength=0.3,
                   alertMultitoneCreated=False, fade=False, **frequency_args)
 
     def test_play(self):
@@ -148,7 +148,7 @@ class TestMultiTone(TestCase):
             DurScale = DurationsScale(scale)
             starttimes = DurScale.getDurations(times=times)
 
-            MultiTone(values=values, starttimes=starttimes, length=0.3,
+            MultiTone(values=values, starttimes=starttimes, bliplength=0.3,
                       alertMultitoneCreated=False, **frequency_args)
 
             self.assertRaises(

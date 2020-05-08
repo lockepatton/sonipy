@@ -67,7 +67,7 @@ Tone = SonifyTool(x, y,
                   frequency_args = frequency_args,
                   duration_args = duration_args,
                   # duration_scale = duration_scale,
-                  length=0.5)
+                  bliplength=0.5)
 
 Tone.play()
 Tone.SaveTone()
