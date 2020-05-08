@@ -118,19 +118,19 @@ class FrequencyScale(object):
                   frequency_min, frequency_max, value_min, value_max)
 
         # checking for which inputs were given
-        self.inputs = []
+        self.y_inputs = []
         if frequency_min != None:
-            self.inputs.append('frequency_min')
+            self.y_inputs.append('frequency_min')
         if frequency_max != None:
-            self.inputs.append('frequency_max')
+            self.y_inputs.append('frequency_max')
         if cents_per_value != None:
-            self.inputs.append('cents_per_value')
-        self.n_inputs = len(self.inputs)
+            self.y_inputs.append('cents_per_value')
+        self.y_n_inputs = len(self.y_inputs)
 
         # raising exception if anything other than two inputs were given
-        if self.n_inputs != 2:
+        if self.y_n_inputs != 2:
             raise Exception('Frequency takes 2 of the frequency_min, frequency_max, and cents_per_value inputs. You inputted {} inputs, which were {}.'.format(
-                self.n_inputs, self.inputs))
+                self.y_n_inputs, self.y_inputs))
 
         # frequency_min and frequency_max input case
         if (cents_per_value == None):
@@ -147,28 +147,28 @@ class FrequencyScale(object):
             frequency_max = get_f_max(frequency_min, cents_per_value,
                                       value_min, value_max)
 
-        self.value_min = value_min
-        self.value_max = value_max
-        self.frequency_max = frequency_max
-        self.frequency_min = frequency_min
-        self.cents_per_value = cents_per_value
+        self.y_value_min = value_min
+        self.y_value_max = value_max
+        self.y_frequency_max = frequency_max
+        self.y_frequency_min = frequency_min
+        self.y_cents_per_value = cents_per_value
 
-        if self.frequency_max > piano_max:
+        if self.y_frequency_max > piano_max:
             warnings.warn('Your maximum frequency of {} Hz is above a pianos maximum of {} Hz.'.format(
-                np.round(self.frequency_max, 2), piano_max))
-        if self.frequency_min < piano_min:
+                np.round(self.y_frequency_max, 2), piano_max))
+        if self.y_frequency_min < piano_min:
             warnings.warn('Your minimum frequency of {} Hz is below a pianos minimum of {} Hz.'.format(
-                np.round(self.frequency_min, 2), piano_min))
-        if self.value_min > self.value_max:
+                np.round(self.y_frequency_min, 2), piano_min))
+        if self.y_value_min > self.y_value_max:
             warnings.warn('Min y value is greater than max y value.')
 
         if verbose:
-            print('initial vals (f_min, f_max, y_min, y_max):', self.frequency_min,
-                  self.frequency_max, self.value_min, self.value_max)
+            print('initial vals (f_min, f_max, y_min, y_max):', self.y_frequency_min,
+                  self.y_frequency_max, self.y_value_min, self.y_value_max)
 
-        def freq(v): return self.frequency_min * \
-            2 ** ((v - self.value_min) * self.cents_per_value / 1200)
-        self.freq_translate_to_range = lambda array: list(map(freq, array))
+        def freq(v): return self.y_frequency_min * \
+            2 ** ((v - self.y_value_min) * self.y_cents_per_value / 1200)
+        self.y_freq_translate_to_range = lambda array: list(map(freq, array))
 
         if verbose:
             print('Frequency Scale Built')

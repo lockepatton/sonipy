@@ -145,17 +145,17 @@ class TestFrequencyScale(TestCase):
         # missing frequency_min
         Scale = FrequencyScale(frequency_max=frequency_max, cents_per_value=cents_per_value2,
                                value_min=vmin2, value_max=vmax2)
-        self.assertEqual(Scale.frequency_min, frequency_min)
+        self.assertEqual(Scale.y_frequency_min, frequency_min)
 
         # missing frequency_max
         Scale = FrequencyScale(frequency_min=frequency_min, cents_per_value=cents_per_value2,
                                value_min=vmin2, value_max=vmax2)
-        self.assertEqual(Scale.frequency_max, frequency_max)
+        self.assertEqual(Scale.y_frequency_max, frequency_max)
 
         # missing cents_per_value
         Scale = FrequencyScale(frequency_min=frequency_min, frequency_max=frequency_max,
                                value_min=vmin2, value_max=vmax2)
-        self.assertEqual(Scale.cents_per_value, cents_per_value2)
+        self.assertEqual(Scale.y_cents_per_value, cents_per_value2)
 
 
 if __name__ == '__main__':

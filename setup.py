@@ -5,14 +5,14 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
      name='sonipy',
-     version='0.1',
+     version='1.0',
      author='Locke Patton',
      author_email='locke.patton@cfa.harvard.edu',
      description='Sonification of 2D plots',
      long_description=long_description,
      long_description_content_type='text/markdown',
      url='https://github.com/lockepatton/sonipy',
-     packages=['sonipy'],
+     packages=setuptools.find_packages(),
      classifiers=[
          'Programming Language :: Python :: 2',
          'License :: OSI Approved :: MIT License',

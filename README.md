@@ -34,21 +34,17 @@ python setup.py install
 ## Example Easy Setup
 
 ``` Python
-from sonify import *
+from sonipy import sonify
 
-C4 = 261.6 # Hz
-args = {'frequency_min' : C4,
-        'frequency_max' : C4*4}
-
-SN = MultiTone(values=x, durations=y,
-               length=0.5, **args)
-SN.SaveTone()
+Tone = sonify.SonifyTool(x, y)
+Tone.play(autoplay=True)
+Tone.save()
 ```
 
 ## Extended Setup
 
 ``` Python
-from sonify import *
+from sonipy.sonify import SonifyTool
 
 C4 = 261.6 # Hz
 frequency_args = {
@@ -60,18 +56,21 @@ frequency_args = {
 }
 
 duration_args = {
-  'time_total' : 2,
-  # 'time_min' : None,
-  # 'time_max' : None,
+  'time_total' : 2000, # ms
+  # 'time_min' : 100, # ms
+  # 'time_max' : 800, # ms
 }
-duration_scale = None
 
-SN = SonifyTool(values=x, durations=y,
-                frequency_args = frequency_args,
-                duration_args = duration_args,
-                # duration_scale = duration_scale,
-                length=0.5)
-SN.SaveTone()
+duration_scale = None # x value / time (ms)
+
+Tone = SonifyTool(x, y,
+                  frequency_args = frequency_args,
+                  duration_args = duration_args,
+                  # duration_scale = duration_scale,
+                  length=0.5)
+
+Tone.play(autoplay=True)
+Tone.SaveTone()
 ```
 
 ## Parameter Inputs
