@@ -20,8 +20,8 @@ date: 1 July 2020
 bibliography: paper.bib
 ---
 
-![](paper/images/Picture1-nobkgd.png)
-Example sonification case: an exploding star's change in brightness is plotted against time. Each datapoint corresponds to a tone blip at a frequency specified by its y value and a time specified by its x value. As the sound file plays, it scans the plot left to right, with the brightest moments of the exploding star reaching pitches of 3 times middle C on the piano and the tail of the cooling supernovae remnant dropping into lower audible pitches.
+![Example sonification case: an exploding star's change in brightness is plotted against time. Each datapoint corresponds to a tone blip at a frequency specified by its y value and a time specified by its x value. As the sound file plays, it scans the plot left to right, with the brightest moments of the exploding star reaching pitches of 3 times middle C on the piano and the tail of the cooling supernovae remnant dropping into lower audible pitches. \label{fig:largeexample}](./images/Picture1-nobkgd.png)
+
 
 
 Introduction
