@@ -16,13 +16,13 @@ Our method of sonification takes in scatterplot data and produces audio clips th
 
 ## Installation
 
-`sonipy` is pip-installable from command line:
+`sonipy` will be pip-installable from command line, as follows:
 
 ``` bash
 pip install sonipy
 ```
 
-Alternately, you can clone the repository and install it yourself:
+For now, you can clone the repository and install it yourself:
 
 ``` bash
 git clone https://github.com/lockepatton/sonipy.git
@@ -102,6 +102,10 @@ Several Jupyter notebook demos that demonstrate some use cases and examples of s
 ## TransientZoo Motivation
 
 This  code  was  developed  as  part  of  TransientZoo,  a  citizen  science  program  that  will  allow  participants,  including  blind and visually impaired individuals, to classify supernova lightcurves using sound. In astronomy, lightcurves depict variations in brightness of a specific astrophysical object as a function of time. For more, see [this summary](https://twitter.com/Astro_Locke/status/1083510515857408000) twitter thread and poster from the 235th American Astronomical Meeting.
+
+## Special Thanks
+
+Thank you to Prof. Allen Downey for permission to host his thinkDSP code in this repository for easier distribution. This work wouldn't be possible without it. For more details about his book *Think DSP: Digital Signal Processing in Python*, see his textbook repository at https://github.com/AllenDowney/ThinkDSP.
 
 ## Attribution
 
