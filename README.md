@@ -33,6 +33,8 @@ python setup.py install
 
 ## Example Easy Setup
 
+For two arrays of the same length, called x and y, you can sonify them using the following:
+
 ``` Python
 from sonipy.sonify import SonifyTool
 
@@ -42,6 +44,8 @@ Tone.save()
 ```
 
 ## Extended Setup
+
+If you would like more fine control of the sonification inputs, you can adjust the underlying arguments as follows. For details about the parameters involved, see the  Parameter Inputs section below.
 
 ``` Python
 from sonipy.sonify import SonifyTool
@@ -77,23 +81,22 @@ Tone.SaveTone()
 
 ### Frequency Scale Parameters:
 
+All frequency parameters are entered inside the frequency_args parameter. The following inputs are all accepted.
+
 1. a minimum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{min}"> and it's corresponding minimum y value <img src="https://render.githubusercontent.com/render/math?math=y_{min}">
 2. a maximum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{max}"> and it's corresponding maximum y value <img src="https://render.githubusercontent.com/render/math?math=y_{max}">
 3. a change in pitch (measured in [cents](https://en.wikipedia.org/wiki/Cent_(music))) over change in y value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dc}{dy}">
 
-All frequency parameters are entered inside the args parameter.
 
 ### Time Scale Parameters:
 
-By default, the sound files are 2 seconds.
+By default, the sound files are 2 seconds. Time parameters are entered by simply by defining a duration_scale (in seconds per x value). Or alternately by passing a duration_args dictionary with some total time, smallest delta time between points or max delta time between points.
 
 1. a total time of the soundfile <img src="https://render.githubusercontent.com/render/math?math=t_{total}">
 2. a change in time (measured in seconds) over change in x value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dt}{dx}">
 
-Time parameters are entered by simply by defining a duration_scale (in seconds per x value). Or alternately by passing a duration_args dictionary with some total time, smallest delta time between points or max delta time between points.
-
 ## Demos
-Several Jupyter notebooks that demonstrate some use cases and examples of sonipy are found
+Several Jupyter notebook demos that demonstrate some use cases and examples of sonipy are found
 [here](https://github.com/lockepatton/sonipy/tree/master/demos).
 
 ## TransientZoo Motivation
