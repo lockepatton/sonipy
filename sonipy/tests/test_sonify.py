@@ -2,7 +2,7 @@ from unittest import TestCase
 import pytest
 import sonipy
 import numpy as np
-import thinkdsp
+import sonipy.thinkdsp as thinkdsp
 
 from sonipy.sonify import MultiTone, SonifyTool
 from sonipy.scales.durations import DurationsScale, getScale

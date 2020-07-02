@@ -62,14 +62,14 @@ def getDurationsMainRun(self, x):
     starttimes = DurationsObj.getDurations(x)
 
     if debug == True:
-        print "x\t", DurationsObj.x
-        print "durations\t",DurationsObj.durations
-        print "dx\t",DurationsObj.dx
-        print "dx / scale", DurationsObj.dx/ DurationsObj.scale
-        print "sum(dx)\t", np.sum(DurationsObj.dx)
-        print "time_total\t", time_total, time_total / s_to_ms
-        print "starttimes",starttimes
-        print "starttimes[0]",starttimes[0],type(starttimes[0])
+        print ("x\t", DurationsObj.x)
+        print ("durations\t",DurationsObj.durations)
+        print ("dx\t",DurationsObj.dx)
+        print ("dx / scale", DurationsObj.dx/ DurationsObj.scale)
+        print ("sum(dx)\t", np.sum(DurationsObj.dx))
+        print ("time_total\t", time_total, time_total / s_to_ms)
+        print ("starttimes",starttimes)
+        print ("starttimes[0]",starttimes[0],type(starttimes[0]))
 
     # testing first durations argument
     first_duration_truth = (x[1]-x[0])/scale

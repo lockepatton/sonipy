@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import os
-import thinkdsp
+import sonipy.thinkdsp as thinkdsp
 import warnings
 
 from sonipy.scales.frequency import FrequencyScale

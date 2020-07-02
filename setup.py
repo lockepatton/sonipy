@@ -14,10 +14,8 @@ setuptools.setup(
      url='https://github.com/lockepatton/sonipy',
      packages=setuptools.find_packages(),
      classifiers=[
-         'Programming Language :: Python :: 2',
+         'Programming Language :: Python :: 3',
          'License :: OSI Approved :: MIT License',
          'Operating System :: OS Independent',
      ],
-     install_requires=['numpy', 'matplotlib', 'pandas', 'pydub',
-                       'repo @ https://github.com/AllenDowney/ThinkDSP.zip#egg=repo-1.0.0'],
- )
+     install_requires=['numpy>=1.16', 'matplotlib', 'seaborn', 'pandas', 'scipy', 'pydub'])
