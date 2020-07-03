@@ -130,7 +130,7 @@ SN.SaveTone()
 
 ## Citizen Science - Supernova Lightcurves
 
-This code was developed as part of TransientZoo, a citizen science program that will allow participants, including BVI individuals, to classify supernova lightcurves using sound. In astronomy, lightcurves depict variations in brightness of a specific astrophysical object as a function of time. The shape of these lightcurves are different depending upon the nature of the star or object creating the bright supernova explosion.
+This code was developed as part of TransientZoo, a citizen science program that will allow participants, including BVI individuals, to classify supernova lightcurves using sound [@Patton:2019]. In astronomy, lightcurves depict variations in brightness of a specific astrophysical object as a function of time. The shape of these lightcurves are different depending upon the nature of the star or object creating the bright supernova explosion.
 
 ![A type Ia supernova lightcurve.\label{fig:Ia}](./images/Ia.png)
 
