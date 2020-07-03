@@ -98,7 +98,7 @@ The user has the power to adjust the frequency scale, the time length of the bli
 We advise a frequency scale set between middle C (C4) and four times the frequency of C4, a typical blip length of 0.5 seconds, and a total sound file duration between 1 and 3 seconds (longer sound files, played subsequently, are difficult for listeners to directly compare). Most humans can discern ~10 cents difference in pitch. Keep this in mind when defining a your cents\_per\_value parameter value for $\frac{dc}{dy}$. Furthermore, we recommend creating a test linear sound file to be sure all your chosen parameters work well with your headphones and hearing.
 
 ```python
-from sonify import *
+from sonipy.sonify import SonifyTool
 
 C4 = 261.6 # Hz
 frequency_args = {
@@ -110,18 +110,21 @@ frequency_args = {
 }
 
 duration_args = {
-  'time_total' : 2,
-  # 'time_min' : None,
-  # 'time_max' : None,
+  'time_total' : 2000, # ms
+  # 'time_min' : 100, # ms
+  # 'time_max' : 800, # ms
 }
-duration_scale = None
 
-SN = SonifyTool(values=x, durations=y,
-                frequency_args = frequency_args,
-                duration_args = duration_args,
-                # duration_scale = duration_scale,
-                length=0.5)
-SN.SaveTone()
+duration_scale = 1. / 2000. # x value / time (ms)
+
+Tone = SonifyTool(x, y,
+                  frequency_args = frequency_args,
+                  duration_args = duration_args,
+                  # duration_scale = duration_scale,
+                  bliplength=0.5)
+
+Tone.play()
+Tone.SaveTone()
 ```
 
 # Our Astronomy Case Study
@@ -130,18 +133,20 @@ SN.SaveTone()
 
 This code was developed as part of TransientZoo, a citizen science program that will allow participants, including BVI individuals, to classify supernova lightcurves using sound [@Patton:2019]. In astronomy, lightcurves depict variations in brightness of a specific astrophysical object as a function of time. The shape of these lightcurves are different depending upon the nature of the star or object creating the bright supernova explosion.
 
-![A type Ia supernova lightcurve (left) and IIb supernova lightcurve (right).\label{fig:CombinedSN}](./images/CombinedSN.png)
+![A type Ia supernova lightcurve.\label{fig:Ia}](./images/Ia.png)
+![A type IIb supernova lightcurve.\label{fig:IIb}](./images/IIb.png)
 
-\autoref{fig:CombinedSN} shows two examples of successfully sonified audio light curves, for a Type IIb and Type Ia supernovae. We find that linear and plateau supernova light curves can be audibly differentiated. This approach offers a new tool for citizen science lightcurve classification.
+\autoref{fig:Ia} and \autoref{fig:IIb} are two examples of successfully sonified audio light curves, for a Type IIb and Type Ia supernovae. We find that linear and plateau supernova light curves can be audibly differentiated. This approach offers a new tool for citizen science lightcurve classification.
 
 ## Other Variable Objects in Astronomy
 
-We've also explored the sonification of other time-domain data, which will eventually help TransientZoo expand into LightcurveZoo. \autoref{fig:CombinedVariables} show examples of an eclipsing binary from Kepler's catalogue and an RR Lyrae from the author's own telescope observations. LightcurveZoo will ultimately include a collection of transients: supernovae, binaries, and variable stars.
+We've also explored the sonification of other time-domain data, which will eventually help TransientZoo expand into LightcurveZoo. \autoref{fig:EB} and \autoref{fig:RRLyrae} show examples of an eclipsing binary from Kepler's catalogue and an RR Lyrae from the author's own telescope observations. LightcurveZoo will ultimately include a collection of transients: supernovae, binaries, and variable stars.
 
-![A variable star, phased over its period (left) and an eclipsing stellar binary (right).\label{fig:CombinedVariables}](./images/CombinedVariables.png)
+![An eclipsing stellar binary.\label{fig:EB}](./images/EB.png)
+![A variable star, phased over its period.\label{fig:RRLyrae}](./images/RRLyrae.png)
 
 # Acknowledgements
 
-Special thanks to to Dr. Christi Miller from the Department of Speech and Hearing Sciences at the University of Washington for her consultation on the topic of human pitch perception and Dr. Chris Laws and Manastash Ridge Observatory for acquisition of some of our example observations. This work was supported by NSF grant AST 1714285 awarded to E.M.L.
+Special thanks to Dr. Chris Laws and Manastash Ridge Observatory for acquisition of some of our example observations, and to Dr. Christi Miller from the Department of Speech and Hearing Sciences at the University of Washington for her consultation on the topic of human pitch perception. This work was supported by NSF grant AST 1714285 awarded to E.M.L.
 
 # References
