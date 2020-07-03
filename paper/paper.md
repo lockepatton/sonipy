@@ -6,10 +6,10 @@ tags:
   - Astronomy
   - Supernova
 authors:
-  - name: Locke Patton^[locke.patton@cfa.harvard.edu]
+  - name: Locke Patton^[locke\.patton\@cfa\.harvard.edu]
     orcid: 0000-0002-7640-236X
     affiliation: "1, 2"
-  - name: Emily Levesque^[emsque@uw.edu]
+  - name: Emily Levesque^[emsque\@uw\.edu]
     affiliation: 1
 affiliations:
  - name: University of Washington, Department of Astronomy,  Seattle, WA 98195 USA
