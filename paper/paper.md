@@ -133,17 +133,15 @@ Tone.SaveTone()
 
 This code was developed as part of TransientZoo, a citizen science program that will allow participants, including BVI individuals, to classify supernova lightcurves using sound [@Patton:2019]. In astronomy, lightcurves depict variations in brightness of a specific astrophysical object as a function of time. The shape of these lightcurves are different depending upon the nature of the star or object creating the bright supernova explosion.
 
-![A type Ia supernova lightcurve.\label{fig:Ia}](./images/Ia.png)
-![A type IIb supernova lightcurve.\label{fig:IIb}](./images/IIb.png)
+![A type Ia supernova lightcurve (left) and IIb supernova lightcurve (right).\label{fig:CombinedSN}](./images/CombinedSN.png)
 
-\autoref{fig:Ia} and \autoref{fig:IIb} are two examples of successfully sonified audio light curves, for a Type IIb and Type Ia supernovae. We find that linear and plateau supernova light curves can be audibly differentiated. This approach offers a new tool for citizen science lightcurve classification.
+\autoref{fig:CombinedSN} shows two examples of successfully sonified audio light curves, for a Type IIb and Type Ia supernovae. We find that linear and plateau supernova light curves can be audibly differentiated. This approach offers a new tool for citizen science lightcurve classification.
 
 ## Other Variable Objects in Astronomy
 
-We've also explored the sonification of other time-domain data, which will eventually help TransientZoo expand into LightcurveZoo. \autoref{fig:EB} and \autoref{fig:RRLyrae} show examples of an eclipsing binary from Kepler's catalogue and an RR Lyrae from the author's own telescope observations. LightcurveZoo will ultimately include a collection of transients: supernovae, binaries, and variable stars.
+We've also explored the sonification of other time-domain data, which will eventually help TransientZoo expand into LightcurveZoo. \autoref{fig:CombinedVariables} show examples of an eclipsing binary from Kepler's catalogue and an RR Lyrae from the author's own telescope observations. LightcurveZoo will ultimately include a collection of transients: supernovae, binaries, and variable stars.
 
-![An eclipsing stellar binary.\label{fig:EB}](./images/EB.png)
-![A variable star, phased over its period.\label{fig:RRLyrae}](./images/RRLyrae.png)
+![A variable star, phased over its period (left) and an eclipsing stellar binary (right).\label{fig:CombinedVariables}](./images/CombinedVariables.png)
 
 # Acknowledgements
 
