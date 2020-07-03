@@ -1,5 +1,5 @@
 ---
-title: 'sonipy: A Perceptually Uniform Sonification Package'
+title: '`Sonipy`: A Perceptually Uniform Sonification Package'
 tags:
   - Python
   - Sonification
@@ -20,11 +20,11 @@ date: 1 July 2020
 bibliography: paper.bib
 ---
 
-![Example sonification case: an exploding star's change in brightness is plotted against time. Each data point corresponds to a tone blip at a frequency specified by its y value and a time specified by its x value. As the sound file plays, it scans the plot left to right, with the brightest moments of the exploding star reaching pitches of 3 times middle C on the piano and the tail of the cooling supernovae remnant dropping into lower audible pitches.](./images/Picture1-nobkgd.png)
-
 # Introduction
 
 `Sonipy` moves beyond visual analyses by sonifying scatter-plot data, producing audio files that depict variations in y as perceptually uniform changes in pitch. Short tones - called blips - are sounded in time at intervals corresponding to x values. We built this code to open up science to participants who are visually impaired, creating scientifically useful and distinguishable sonifications of scatterplot data.
+
+![Example sonification case: an exploding star's change in brightness is plotted against time. Each data point corresponds to a tone blip at a frequency specified by its y value and a time specified by its x value. As the sound file plays, it scans the plot left to right, with the brightest moments of the exploding star reaching pitches of 3 times middle C on the piano and the tail of the cooling supernovae remnant dropping into lower audible pitches.](./images/Picture1-nobkgd.png)
 
 ## Understanding pitch
 
@@ -38,15 +38,13 @@ With these parameters, xy scatterplot data can be translated into audio files th
 
 # The Case for Sonification: Why sonify lightcurves?
 
-Thanks to the nature of human hearing, we can audibly discern subsequent pitch differences of 10 cents. On a y scale ranging from 0 to 10, that corresponds to hearing variations as small as $\Delta y ~ 0.03$. This simultaneous depth and range makes pitch-varied audio an incredibly powerful and accessible tool for understanding nuances in data. Through our sonification efforts of astronomical data we have found that listeners can discern differences in the brightness, duration, and period of time-domain variations when the changes in brightness are expressed as changes in pitch.
-
-This approach also opens up science and citizen science to participants who are visually impaired, and empowers blind and visually impaired (BVI) individuals to explore their own data.
+Thanks to the nature of human hearing, we can audibly discern subsequent pitch differences of 10 cents. On a y scale ranging from 0 to 10, that corresponds to hearing variations as small as $\Delta y \approx 0.03$. This simultaneous depth and range makes pitch-varied audio an incredibly powerful and accessible tool for understanding nuances in data. Through our sonification efforts of astronomical data we have found that listeners can discern differences in the brightness, duration, and period of time-domain variations when the changes in brightness are expressed as changes in pitch. This approach also opens up science and citizen science to participants who are visually impaired, and empowers blind and visually impaired (BVI) individuals to explore their own data.
 
 # Our Sonification Technique
 
-As seen in Figure \autoref{fig:method}, we built our technique so that each xy data point has a corresponding short tone called a blip. The y value of a given data point corresponds to the pitch of its blip, while the x value corresponds to the placement of the blip in time. More sampled x values have a great blip density in time, and as y value increases or decreases, the tone's pitch gets higher or lower, respectively.
+As seen in \autoref{fig:method}, we built our technique so that each xy data point has a corresponding short tone called a blip. The y value of a given data point corresponds to the pitch of its blip, while the x value corresponds to the placement of the blip in time. More sampled x values have a great blip density in time, and as y value increases or decreases, the tone's pitch gets higher or lower, respectively.
 
-![Each data point corresponds to a short tone or \"blip\" in the sound file. Here the x and y values of a sine function with some noise are shown in black. The x value of a given data point determines the placement of the tone in time. The y value determines the tone's pitch. Beside each data point, we've placed a visualization of its blip, shown in color. This blip trail, with a length corresponding to the duration of the blip, shows the variation of the amplitude of the pitch at its frequency. Note that as the values get higher, the corresponding frequency of the blip increases greatly indicating a higher pitch. All of these blips are combined in time to create the sound file.\label{fig:method}](./images/Method1.png)
+![Each data point corresponds to a short tone or \"blip\" in the sound file. Here the x and y values of a sine function with some noise are shown in black. The x value of a given data point determines the placement of the tone in time. The y value determines the tone's pitch. Beside each data point, we've placed a visualization of its blip, shown in color. This blip trail, with a length corresponding to the duration of the blip, shows the variation of the amplitude of the pitch at its frequency. Note that as the values get higher, the corresponding frequency of the blip increases greatly indicating a higher pitch. All of these blips are combined in time to create the sound file.\label{fig:method}](./images/Method2.png)
 
 ## Y Values: Pitch
 
@@ -136,11 +134,11 @@ This code was developed as part of TransientZoo, a citizen science program that 
 
 ![A type IIb supernova lightcurve.\label{fig:IIb}](./images/IIb.png)
 
-Figure \autoref{fig:Ia} and \autoref{fig:IIb} are two examples of successfully sonified audio light curves, for a Type IIb and Type Ia supernovae. We find that linear and plateau supernova light curves can be audibly differentiated. This approach offers a new tool for citizen science lightcurve classification.
+\autoref{fig:Ia} and \autoref{fig:IIb} are two examples of successfully sonified audio light curves, for a Type IIb and Type Ia supernovae. We find that linear and plateau supernova light curves can be audibly differentiated. This approach offers a new tool for citizen science lightcurve classification.
 
 ## Other Variable Objects in Astronomy
 
-We've also explored the sonification of other time-domain data, which will eventually help TransientZoo expand into LightcurveZoo. Figures \autoref{fig:EB} and \autoref{fig:RRLyrae} show examples of an eclipsing binary from Kepler's catalogue and an RR Lyrae from the author's own telescope observations. LightcurveZoo will ultimately include a collection of transients: supernovae, binaries, and variable stars.
+We've also explored the sonification of other time-domain data, which will eventually help TransientZoo expand into LightcurveZoo. \autoref{fig:EB} and \autoref{fig:RRLyrae} show examples of an eclipsing binary from Kepler's catalogue and an RR Lyrae from the author's own telescope observations. LightcurveZoo will ultimately include a collection of transients: supernovae, binaries, and variable stars.
 
 ![An eclipsing stellar binary.\label{fig:EB}](./images/EB.png)
 
