@@ -18,20 +18,19 @@ Our method of sonification takes in scatterplot data and produces audio clips th
 
 ## Installation
 
-`sonipy` will be pip-installable from command line, as follows:
+`sonipy` is pip-installable from command line, as follows:
 
 ``` bash
 pip install sonipy
 ```
 
-For now, you can clone the repository and install it yourself:
+Alternately, you can clone the repository and install it yourself, also in command line:
 
 ``` bash
 git clone https://github.com/lockepatton/sonipy.git
 cd sonipy
 python setup.py install
 ```
-
 
 ## Example Easy Setup
 
@@ -89,7 +88,6 @@ All frequency parameters are entered inside the frequency_args parameter. The fo
 2. a maximum frequency <img src="https://render.githubusercontent.com/render/math?math=f_{max}"> and it's corresponding maximum y value <img src="https://render.githubusercontent.com/render/math?math=y_{max}">
 3. a change in pitch (measured in [cents](https://en.wikipedia.org/wiki/Cent_(music))) over change in y value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dc}{dy}">
 
-
 ### Time Scale Parameters:
 
 By default, the sound files are 2 seconds. Time parameters are entered by simply by defining a duration_scale (in seconds per x value). Or alternately by passing a duration_args dictionary with some total time, smallest delta time between points or max delta time between points.
@@ -108,6 +106,10 @@ This  code  was  developed  as  part  of  TransientZoo,  a  citizen  science  pr
 ## Special Thanks
 
 Thank you to Prof. Allen Downey for permission to host his thinkDSP code in this repository for easier distribution. This work wouldn't be possible without it. For more details about his book *Think DSP: Digital Signal Processing in Python*, see his textbook repository at https://github.com/AllenDowney/ThinkDSP.
+
+## Reach Out
+
+Have an issue with your operating system? Let us know by opening an issue! Have a suggestion for how to make this code more accessible? Send Locke an email at locke.patton@cfa.harvard.edu.
 
 ## Attribution
 

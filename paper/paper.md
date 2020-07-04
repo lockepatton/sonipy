@@ -42,7 +42,7 @@ Thanks to the nature of human hearing, we can audibly discern subsequent pitch d
 
 # Our Sonification Technique
 
-As seen in \autoref{fig:method}, we built our technique so that each xy data point has a corresponding short tone called a blip. The y value of a given data point corresponds to the pitch of its blip, while the x value corresponds to the placement of the blip in time. More sampled x values have a great blip density in time, and as y value increases or decreases, the tone's pitch gets higher or lower, respectively.
+As seen in \autoref{fig:method}, we built our technique so that each xy data point has a corresponding short tone called a blip. The y value of a given data point corresponds to the pitch of its blip, while the x value corresponds to the placement of the blip in time. More sampled x values have a greater blip density in time, and as y value increases or decreases, the tone's pitch gets higher or lower, respectively.
 
 ![Each data point corresponds to a short tone or \"blip\" in the sound file. Here the x and y values of a sine function with some noise are shown in black. The x value of a given data point determines the placement of the tone in time. The y value determines the tone's pitch. Beside each data point, we've placed a visualization of its blip, shown in color. This blip trail, with a length corresponding to the duration of the blip, shows the variation of the amplitude of the pitch at its frequency. Note that as the values get higher, the corresponding frequency of the blip increases greatly indicating a higher pitch. All of these blips are combined in time to create the sound file.\label{fig:method}](./images/Method2.png)
 
@@ -145,6 +145,6 @@ We've also explored the sonification of other time-domain data, which will event
 
 # Acknowledgements
 
-Special thanks to Dr. Chris Laws and Manastash Ridge Observatory for acquisition of some of our example observations, and to Dr. Christi Miller from the Department of Speech and Hearing Sciences at the University of Washington for her consultation on the topic of human pitch perception. This work was supported by NSF grant AST 1714285 awarded to E.M.L.
+Special thanks to Dr. Christi Miller from the Department of Speech and Hearing Sciences at the University of Washington for her consultation on the topic of human pitch perception, and to Dr. Chris Laws and Manastash Ridge Observatory for acquisition of some of our example observations. Grateful thanks to Prof. Allen Downey for permission to host his thinkDSP.py code in this repository for easier distribution [@Downey:2018]. This work was supported by NSF grant AST 1714285 awarded to E.M.L.
 
 # References
