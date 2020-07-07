@@ -1,6 +1,7 @@
 # `sonipy` : A Scatterplot Sonification Package
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/lockepatton/sonipy/blob/master/LICENSE.txt)
+[![nbviewer](https://img.shields.io/badge/jupyter%20notebooks-nbviewer-blue)](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb)
 
 A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible.
 
@@ -97,7 +98,7 @@ By default, the sound files are 2 seconds. Time parameters are entered by simply
 
 ## Demos
 Several Jupyter notebook demos that demonstrate some use cases and examples of sonipy are found
-[here](https://github.com/lockepatton/sonipy/tree/master/demos).
+[here](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb).
 
 ## TransientZoo Motivation
 
