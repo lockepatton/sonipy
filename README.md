@@ -2,6 +2,7 @@
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/lockepatton/sonipy/blob/master/LICENSE.txt)
 [![nbviewer](https://img.shields.io/badge/jupyter%20notebooks-nbviewer-blue)](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lockepatton/sonipy/master?filepath=demos%2FTutorial.ipynb)
 
 A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible.
 
@@ -97,8 +98,7 @@ By default, the sound files are 2 seconds. Time parameters are entered by simply
 2. a change in time (measured in seconds) over change in x value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dt}{dx}">
 
 ## Demos
-Several Jupyter notebook demos that demonstrate some use cases and examples of sonipy are found
-[here](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb).
+Several Jupyter notebook demos that demonstrate some use cases and examples of sonipy are found [here](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb), with an interactive version found [here](https://mybinder.org/v2/gh/lockepatton/sonipy/master?filepath=demos%2FTutorial.ipynb).
 
 ## TransientZoo Motivation
 
