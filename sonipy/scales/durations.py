@@ -4,6 +4,8 @@ import numpy as np
 
 s_to_ms = 1000.
 
+__all__ = ['from_max_ms','from_min_ms','from_total_ms','getScale','DurationsScale']
+
 def from_max_ms(x, dtime_max):
     """
     Calculates a time scale in units of x value / time (ms), by matching the largest time step in the x array to the input dtime_max.

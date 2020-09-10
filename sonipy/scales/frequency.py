@@ -6,6 +6,8 @@ C4 = 261.6  # Hz
 piano_max = 4186.01  # Hz
 piano_min = 27.5000  # Hz - not audible
 
+__all__ = ['cent_per_value','get_f_min','get_f_max','FrequencyScale']
+
 def cent_per_value(f_min, f_max, v_min, v_max):
     """
     This function takes in a frequency max and min, and y value max and min and returns a y scale parameter in units of cents/y value.

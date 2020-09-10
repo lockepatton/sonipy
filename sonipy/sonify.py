@@ -21,6 +21,7 @@ piano_max = 4186.01  # Hz
 piano_min = 27.5000  # Hz - not audible
 s_to_ms = 1000.
 
+__all__ = ['MultiTone','SonifyTool']
 
 class MultiTone(FrequencyScale):
     """
