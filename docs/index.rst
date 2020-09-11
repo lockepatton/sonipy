@@ -1,9 +1,9 @@
 ******************
-sonipy Documentation
+``sonipy`` Documentation
 ******************
 
-``sonipy`` : A Scatterplot Sonification Package Documentation
-=============================================================
+A Scatterplot Sonification Package
+==================================
 
 |MIT License| |nbviewer| |Binder|
 
@@ -26,7 +26,7 @@ Our method of sonification takes in scatterplot data and produces audio
 clips that depict each datapoint as a short sound blip with a y value
 corresponding to pitch and an x value corresponding to arrival time.
 
-.. figure:: ./paper/images/Method2.png
+.. figure:: ../paper/images/Method2.png
   :alt: sonipy setup
 
   sonipy setup
@@ -53,6 +53,11 @@ in command line:
   git clone https://github.com/lockepatton/sonipy.git
   cd sonipy
   python setup.py install
+
+If you would just like to play around with our sonifying tool online, without any
+installation, you can play with the tutorial with binder `here
+<https://mybinder.org/v2/gh/lockepatton/sonipy/master?filepath=demos%2FTutorial.ipynb>`__.
+
 
 Example Easy Setup
 ------------------
@@ -180,9 +185,6 @@ paper.
   :target: https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb
 .. |Binder| image:: https://mybinder.org/badge_logo.svg
   :target: https://mybinder.org/v2/gh/lockepatton/sonipy/master?filepath=demos%2FTutorial.ipynb
-
-
-
 
 
 
