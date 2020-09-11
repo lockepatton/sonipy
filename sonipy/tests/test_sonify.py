@@ -143,6 +143,7 @@ class TestMultiTone(TestCase):
             from IPython.display import Audio
             Tone.play()
         except:
+            import warnings
             warnings.warn("Can't import Audio from IPython.display; most likely not using jupyter noteebok.")
             pass
 
