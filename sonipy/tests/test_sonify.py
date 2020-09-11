@@ -138,7 +138,14 @@ class TestMultiTone(TestCase):
     def test_play(self):
         # check to make sure .play(), the wrapper of ThinkDSP .make_audio(), runs
         scale, Tone = createTone(x_lin, y_lin)
-        Tone.play()
+
+        try:
+            from IPython.display import Audio
+            Tone.play()
+        except:
+            warnings.warn("Can't import Audio from IPython.display; most likely not using jupyter noteebok.")
+            pass
+
 
     def test_raises_exception_if_starttimes_and_values_not_equal_length(self):
         times, values = x_lin[:4], y_lin
