@@ -4,6 +4,7 @@
 [![nbviewer](https://img.shields.io/badge/jupyter%20notebooks-nbviewer-blue)](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lockepatton/sonipy/master?filepath=demos%2FTutorial.ipynb)
 [![Documentation Status](https://readthedocs.org/projects/sonipy/badge/?version=latest)](https://sonipy.readthedocs.io/en/latest/?badge=latest)
+[![Build Status](https://api.travis-ci.org/lockepatton/sonipy.png?branch=master)](https://travis-ci.org/github/lockepatton/sonipy)
 
 A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible.
 
