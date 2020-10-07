@@ -10,23 +10,25 @@ give or receive advice.
 This project is a cross-over between github, python code development and BVI
 (blind and/or visually impaired) accessibility. If you have feedback or ideas,
 please reach out! Send Locke an email at locke.patton@cfa.harvard.edu, or open
-an issue on sonipy!
+an issue on `sonipy`!
 
 # Contributing - some basics to get you started
 
 [Here](https://guides.github.com/activities/hello-world/) is a github basics tutorial.
 
-First you will want to fork sonipy which creates your own copy of the complete code on github that
+First you will want to fork `sonipy` which creates your own copy of the complete code on github that
 won't update until you specifically make changes to it. This way you can make independent changes
 to your version of the code, without affecting everyone. To fork, click the "fork" button
-on the top right of the homepage of sonipy.
+on the top right of the homepage of `sonipy`.
 
-Next clone your copy of sonipy. This copies all the files to your local machine.
+Next clone your copy of `sonipy`. This copies all the files to your local machine.
 You will want to work from command line or terminal to run these commands.
 
+``` bash
   git clone <https://github.com/lockepatton/sonipy>
   cd sonipy
   python setup.py install
+```
 
 Make local changes to your machine here. If you are adding new functions, please
 add additional functions in the ./tests/ folder to make sure that your code can be
@@ -39,5 +41,5 @@ tests folder README for more information on how to test on your local machine.
 Finally, you can push to your fork of the project and submit a pull request. At that point you're
 waiting on us. We can suggest changes or improvments or merge changes directly.
 
-At any point of this process you can reach out to us - either as an issue on github or
+At any point in this process, you can reach out - either as an issue on github or
 via email. This was once brand new to us too.
