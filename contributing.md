@@ -39,7 +39,7 @@ Make sure you've tested the code and checked to see if the code passes all tests
 tests folder README for more information on how to test on your local machine.
 
 Finally, you can push to your fork of the project and submit a pull request. At that point you're
-waiting on us. We can suggest changes or improvments or merge changes directly.
+waiting on us. We can suggest changes or improvements or merge changes directly.
 
-At any point in this process, you can reach out - either as an issue on github or
-via email. This was once brand new to us too.
+At any point in this process, you can reach out - either as an issue on github,
+via email, or [twitter](https://twitter.com/Astro_Locke). This was once brand new to us too.
