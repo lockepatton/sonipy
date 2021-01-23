@@ -34,7 +34,7 @@ The cent is a logarithmic unit of measure for pitch intervals where $n \approx 3
 
 ## Human Pitch Sensitivity
 
-The average person is capable of discerning independent subsequent pitches with a difference of ~10 cents [@Kollmeier:2008]. The human ear is most sensitive to frequencies between $\sim$500-4000 Hz, similar to the range of a standard piano.
+The average person is capable of discerning independent subsequent pitches with a difference of ~10 cents [@Kollmeier:2008]. The human ear is most sensitive to frequencies between ~500-4000 Hz, similar to the range of a standard piano.
 
 With these parameters, xy scatterplot data can be translated into audio files that map y values to specific pitch frequencies, with the minimum discernible $\Delta y$ corresponding to a 10 cent pitch difference.
 
