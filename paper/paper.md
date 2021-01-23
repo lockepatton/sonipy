@@ -1,15 +1,15 @@
 ---
-title: 'sonipy: A Perceptually Uniform Sonification Package'
+title: 'Pysonic: A Pitch-Based Sonification Package'
 tags:
   - Python
   - Sonification
   - Astronomy
   - Supernova
 authors:
-  - name: Locke Patton^[locke.patton@cfa.harvard.edu]
+  - name: Locke Patton^[locke.patton\@cfa.harvard.edu]
     orcid: 0000-0002-7640-236X
     affiliation: "1, 2"
-  - name: Emily Levesque^[emsque@uw.edu]
+  - name: Emily Levesque^[emsque\@uw.edu]
     affiliation: 1
 affiliations:
  - name: University of Washington, Department of Astronomy,  Seattle, WA 98195 USA
@@ -49,7 +49,7 @@ In fact, this code was specifically designed for this use case. Already it’s b
 
 # State of the Field
 
-Sonification of scientific data has a long history of precedent. The most relevant projects have been completed by SYSTEM Sounds, run by Matt Russo, with the intent of public astronomy outreach through sonifications. He and his team have used various sonic methods to produce auditory experiences of data, ranging from an exoplanet period correlated with musical beats to a scan across pictures of Saturn's ring matching image components to pitch and volume. Most similar to our work is his sonification of a Hubble image of a galaxy cluster - time flows from left to right across the image while the frequency of sound changes from bottom to top of the image; the brightness at any point correlates with loudness. Other works that sonify supernovae have been completed by Alicia Soderberg and Raffaella Margutti, matching different musical instrument sounds to different wavelength regimes and correlating the brightness of an object with pitch or loudness. In the field of astronomy more generally, the LIGO collaboration famously produces sound files mapping a 2D histogram of a black hole merger's gravitational wave signal to pitch and matching gravitational wave frequency to sound frequency (creating the distinctive upward "chip" sound now associated with gravitational wave mergers).
+Sonification of scientific data has a long history of precedent. The most relevant projects have been completed by SYSTEM Sounds, run by Matt Russo, with the intent of public astronomy outreach through sonifications. He and his team have used various sonic methods to produce auditory experiences of data, ranging from an exoplanet period correlated with musical beats to a scan across pictures of Saturn's ring matching image components to pitch and volume. Most similar to our work is his sonification of a Hubble image of a galaxy cluster - time flows from left to right across the image while the frequency of sound changes from bottom to top of the image; the brightness at any point correlates with loudness. Other works that sonify supernovae have been completed by Alicia Soderberg and Raffaella Margutti, matching different musical instrument sounds to different wavelength regimes and correlating the brightness of an object with pitch or loudness. In the field of astronomy more generally, the LIGO collaboration famously produces sound files mapping a 2D histogram of a black hole merger's gravitational wave signal to pitch and matching gravitational wave frequency to sound frequency (creating the distinctive upward "chirp" sound now associated with gravitational wave mergers).
 
 However, with all of these sonification tools the purpose of the sound is to communicate science rather than to aurally analyze the data or increase research accessibility. Our code implements a sonification method that is perceptually consistent (using scientific measures of pitch perception rather than harder-to-discern variations such as loudness). This allows users to reliably analyze scatter plots by listening to them, making this the first sonification tool suitable for scientific research. Future data sonification codes in astronomy, such as `astronify`, are already building upon our core method, and potential applications in the field include collaborations with large survey projects in astronomy such as the Zwicky Transient Facility and the Vera C. Rubin Observatory.
 
