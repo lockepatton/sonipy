@@ -16,11 +16,15 @@ import scipy.fftpack
 import subprocess
 import warnings
 
-from fractions import gcd
 from wave import open as open_wave
 from scipy.io import wavfile
 
 import matplotlib.pyplot as plt
+
+try:
+    from math import gcd
+except ImportError:
+    from fractions import gcd
 
 try:
     from IPython.display import Audio
