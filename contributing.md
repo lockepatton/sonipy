@@ -36,7 +36,7 @@ checked as the code continues to change.
 
 When you are happy with your changes, you can commit them and push them from your local machine.
 Make sure you've tested the code and checked to see if the code passes all tests. See the
-tests folder README for more information on how to test on your local machine.
+tests folder [README](https://github.com/lockepatton/sonipy/blob/master/tests/README.md) for more information on how to test on your local machine.
 
 Finally, you can push to your fork of the project and submit a pull request. At that point you're
 waiting on us. We can suggest changes or improvements or merge changes directly.

@@ -1,8 +1,8 @@
-# `sonipy` : A Scatterplot Sonification Package
+pysonicpysonic# `pysonic` : A Scatterplot Sonification Package
 
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/lockepatton/sonipy/blob/master/LICENSE.txt)
-[![nbviewer](https://img.shields.io/badge/jupyter%20notebooks-nbviewer-blue)](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lockepatton/sonipy/master?filepath=demos%2FTutorial.ipynb)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/lockepatton/pysonic/blob/master/LICENSE.txt)
+[![nbviewer](https://img.shields.io/badge/jupyter%20notebooks-nbviewer-blue)](https://nbviewer.jupyter.org/github/lockepatton/pysonic/blob/master/demos/Tutorial.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lockepatton/pysonic/master?filepath=demos%2FTutorial.ipynb)
 [![Documentation Status](https://readthedocs.org/projects/sonipy/badge/?version=latest)](https://sonipy.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://api.travis-ci.org/lockepatton/sonipy.png?branch=master)](https://travis-ci.org/github/lockepatton/sonipy)
 
@@ -10,29 +10,29 @@ A package to turn scatter plots into perceptually uniform sound files for use in
 
 This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque). Click [here](https://twitter.com/Astro_Locke/status/1083510515857408000) for a twitter thread explaining the motivation behind this project.
 
-## What does `sonipy` do?
+## What does `pysonic` do?
 
 Here is an [example sonification](https://twitter.com/Astro_Locke/status/1083510562187751424).
 
 Our method of sonification takes in scatterplot data and produces audio clips that depict each datapoint as a short sound blip with a y value corresponding to pitch and an x value corresponding to arrival time.
 
-![sonipy setup](./paper/images/Method2.png)
+![pysonic setup](./paper/images/Method2.png)
 
 **Each data point has a corresponding short tone called a `blip`,** with a y value corresponding to its pitch and a x value corresponding to its arrival time. Higher y value data points have higher corresponding blip pitches.
 
 ## Installation
 
-`sonipy` is pip-installable from command line, as follows:
+`pysonic` is pip-installable from command line, as follows:
 
 ``` bash
-pip install sonipy
+pip install pysonic
 ```
 
 Alternately, you can clone the repository and install it yourself, also in command line:
 
 ``` bash
-git clone https://github.com/lockepatton/sonipy.git
-cd sonipy
+git clone https://github.com/lockepatton/pysonic.git
+cd pysonic
 python setup.py install
 ```
 
@@ -41,7 +41,7 @@ python setup.py install
 For two arrays of the same length, called x and y, you can sonify them using the following:
 
 ``` Python
-from sonipy.sonify import SonifyTool
+from pysonic.sonify import SonifyTool
 
 Tone = SonifyTool(x, y)
 Tone.play()
@@ -53,7 +53,7 @@ Tone.save()
 If you would like more fine control of the sonification inputs, you can adjust the underlying arguments as follows. For details about the parameters involved, see the  Parameter Inputs section below.
 
 ``` Python
-from sonipy.sonify import SonifyTool
+from pysonic.sonify import SonifyTool
 
 C4 = 261.6 # Hz
 frequency_args = {
@@ -100,7 +100,7 @@ By default, the sound files are 2 seconds. Time parameters are entered by simply
 2. a change in time (measured in seconds) over change in x value parameter <img src="https://render.githubusercontent.com/render/math?math=\frac{dt}{dx}">
 
 ## Demos
-Several Jupyter notebook demos that demonstrate some use cases and examples of sonipy are found [here](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb), with an interactive version found [here](https://mybinder.org/v2/gh/lockepatton/sonipy/master?filepath=demos%2FTutorial.ipynb).
+Several Jupyter notebook demos that demonstrate some use cases and examples of pysonic are found [here](https://nbviewer.jupyter.org/github/lockepatton/pysonic/blob/master/demos/Tutorial.ipynb), with an interactive version found [here](https://mybinder.org/v2/gh/lockepatton/pysonic/master?filepath=demos%2FTutorial.ipynb).
 
 ## TransientZoo Motivation
 
@@ -112,7 +112,9 @@ Thank you to Prof. Allen Downey for permission to host his thinkDSP code in this
 
 ## Reach Out
 
-Have an issue with your operating system? Let us know by opening an issue! Have a suggestion for how to make this code more accessible? Send Locke an email at locke.patton@cfa.harvard.edu.
+Work on this project is welcomed. For more information on contributing, see our [contributing.md guidelines](https://github.com/lockepatton/sonipy/blob/master/contributing.md).
+
+Have an issue with your operating system or any other suggestions/improvements? Let us know by opening an issue! Have a suggestion for how to make this code more accessible? Send Locke an email at locke.patton@cfa.harvard.edu or reach out via a github issue.
 
 ## Attribution
 
