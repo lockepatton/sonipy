@@ -16,7 +16,9 @@ setuptools.setup(
      classifiers=[
          'Programming Language :: Python :: 3.6',
          'Programming Language :: Python :: 3.7',
+         'Programming Language :: Python :: 3.8',
+         'Programming Language :: Python :: 3.9',
          'License :: OSI Approved :: MIT License',
          'Operating System :: OS Independent',
      ],
-     install_requires=['numpy>=1.16', 'matplotlib', 'seaborn', 'pandas', 'scipy', 'pydub','IPython'])
+     install_requires=['numpy>=1.16.4', 'matplotlib', 'seaborn', 'pandas', 'scipy', 'pydub','IPython'])
