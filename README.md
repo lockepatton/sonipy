@@ -1,4 +1,4 @@
-sonipysonipysonipy# `sonipy` : A Scatterplot Sonification Package
+# `sonipy` : A Scatterplot Sonification Package
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/lockepatton/sonipy/blob/master/LICENSE.txt)
 [![nbviewer](https://img.shields.io/badge/jupyter%20notebooks-nbviewer-blue)](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb)
