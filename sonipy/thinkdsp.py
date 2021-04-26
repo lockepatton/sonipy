@@ -72,7 +72,7 @@ class WavFileWriter:
         self.fp.setnchannels(self.nchannels)
         self.fp.setsampwidth(self.sampwidth)
         self.fp.setframerate(self.framerate)
-
+#
     def write(self, wave):
         """Writes a wave.
 
@@ -90,66 +90,6 @@ class WavFileWriter:
             self.write(rest(duration))
 
         self.fp.close()
-
-
-def read_wave(filename="sound.wav"):
-    """Reads a wave file.
-
-    filename: string
-
-    returns: Wave
-    """
-    fp = open_wave(filename, "r")
-
-    nchannels = fp.getnchannels()
-    nframes = fp.getnframes()
-    sampwidth = fp.getsampwidth()
-    framerate = fp.getframerate()
-
-    z_str = fp.readframes(nframes)
-
-    fp.close()
-
-    dtype_map = {1: np.int8, 2: np.int16, 3: "special", 4: np.int32}
-    if sampwidth not in dtype_map:
-        raise ValueError("sampwidth %d unknown" % sampwidth)
-
-    if sampwidth == 3:
-        xs = np.fromstring(z_str, dtype=np.int8).astype(np.int32)
-        ys = (xs[2::3] * 256 + xs[1::3]) * 256 + xs[0::3]
-    else:
-        ys = np.fromstring(z_str, dtype=dtype_map[sampwidth])
-
-    # if it's in stereo, just pull out the first channel
-    if nchannels == 2:
-        ys = ys[::2]
-
-    # ts = np.arange(len(ys)) / framerate
-    wave = Wave(ys, framerate=framerate)
-    wave.normalize()
-    return wave
-
-
-def read_wave_with_scipy(filename):
-    """Reads a wave file.
-
-    filename: string
-
-    returns: Wave
-    """
-    # TODO: Check back later and see if this works on 24-bit data,
-    # and runs without throwing warnings.
-    framerate, ys = wavfile.read(filename)
-
-    # if it's in stereo, just pull out the first channel
-    if ys.ndim == 2:
-        ys = ys[:, 0]
-
-    # ts = np.arange(len(ys)) / framerate
-    wave = Wave(ys, framerate=framerate)
-    wave.normalize()
-    return wave
-
 
 def play_wave(filename="sound.wav", player="aplay"):
     """Plays a wave file.
@@ -209,61 +149,6 @@ class _SpectrumParent:
         Returns: new Spectrum
         """
         return copy.deepcopy(self)
-
-    def max_diff(self, other):
-        """Computes the maximum absolute difference between spectra.
-
-        other: Spectrum
-
-        returns: float
-        """
-        assert self.framerate == other.framerate
-        assert len(self) == len(other)
-
-        hs = self.hs - other.hs
-        return np.max(np.abs(hs))
-
-    def ratio(self, denom, thresh=1, val=0):
-        """The ratio of two spectrums.
-
-        denom: Spectrum
-        thresh: values smaller than this are replaced
-        val: with this value
-
-        returns: new Wave
-        """
-        ratio_spectrum = self.copy()
-        ratio_spectrum.hs /= denom.hs
-        ratio_spectrum.hs[denom.amps < thresh] = val
-        return ratio_spectrum
-
-    def invert(self):
-        """Inverts this spectrum/filter.
-
-        returns: new Wave
-        """
-        inverse = self.copy()
-        inverse.hs = 1 / inverse.hs
-        return inverse
-
-    @property
-    def freq_res(self):
-        return self.framerate / 2 / (len(self.fs) - 1)
-
-    def render_full(self, high=None):
-        """Extracts amps and fs from a full spectrum.
-
-        high: cutoff frequency
-
-        returns: fs, amps
-        """
-        hs = np.fft.fftshift(self.hs)
-        amps = np.abs(hs)
-        fs = np.fft.fftshift(self.fs)
-        i = 0 if high is None else find_index(-high, fs)
-        j = None if high is None else find_index(high, fs) + 1
-        return fs[i:j], amps[i:j]
-
     def plot(self, high=None, **options):
         """Plots amplitude vs frequency.
 
@@ -289,26 +174,6 @@ class _SpectrumParent:
         else:
             i = None if high is None else find_index(high, self.fs)
             plt.plot(self.fs[:i], self.power[:i], **options)
-
-    def estimate_slope(self):
-        """Runs linear regression on log power vs log frequency.
-
-        returns: slope, inter, r2, p, stderr
-        """
-        x = np.log(self.fs[1:])
-        y = np.log(self.power[1:])
-        t = scipy.stats.linregress(x, y)
-        return t
-
-    def peaks(self):
-        """Finds the highest peaks and their frequencies.
-
-        returns: sorted list of (amplitude, frequency) pairs
-        """
-        t = list(zip(self.amps, self.fs))
-        t.sort(reverse=True)
-        return t
-
 
 class Spectrum(_SpectrumParent):
     """Represents the spectrum of a signal."""
@@ -344,111 +209,6 @@ class Spectrum(_SpectrumParent):
         hs = self.hs * other.hs
         return Spectrum(hs, self.fs, self.framerate, self.full)
 
-    def convolve(self, other):
-        """Convolves two Spectrums.
-
-        other: Spectrum
-
-        returns: Spectrum
-        """
-        assert all(self.fs == other.fs)
-        if self.full:
-            hs1 = np.fft.fftshift(self.hs)
-            hs2 = np.fft.fftshift(other.hs)
-            hs = np.convolve(hs1, hs2, mode="same")
-            hs = np.fft.ifftshift(hs)
-        else:
-            # not sure this branch would mean very much
-            hs = np.convolve(self.hs, other.hs, mode="same")
-
-        return Spectrum(hs, self.fs, self.framerate, self.full)
-
-    @property
-    def real(self):
-        """Returns the real part of the hs (read-only property)."""
-        return np.real(self.hs)
-
-    @property
-    def imag(self):
-        """Returns the imaginary part of the hs (read-only property)."""
-        return np.imag(self.hs)
-
-    @property
-    def angles(self):
-        """Returns a sequence of angles (read-only property)."""
-        return np.angle(self.hs)
-
-    def scale(self, factor):
-        """Multiplies all elements by the given factor.
-
-        factor: what to multiply the magnitude by (could be complex)
-        """
-        self.hs *= factor
-
-    def low_pass(self, cutoff, factor=0):
-        """Attenuate frequencies above the cutoff.
-
-        cutoff: frequency in Hz
-        factor: what to multiply the magnitude by
-        """
-        self.hs[abs(self.fs) > cutoff] *= factor
-
-    def high_pass(self, cutoff, factor=0):
-        """Attenuate frequencies below the cutoff.
-
-        cutoff: frequency in Hz
-        factor: what to multiply the magnitude by
-        """
-        self.hs[abs(self.fs) < cutoff] *= factor
-
-    def band_stop(self, low_cutoff, high_cutoff, factor=0):
-        """Attenuate frequencies between the cutoffs.
-
-        low_cutoff: frequency in Hz
-        high_cutoff: frequency in Hz
-        factor: what to multiply the magnitude by
-        """
-        # TODO: test this function
-        fs = abs(self.fs)
-        indices = (low_cutoff < fs) & (fs < high_cutoff)
-        self.hs[indices] *= factor
-
-    def pink_filter(self, beta=1):
-        """Apply a filter that would make white noise pink.
-
-        beta: exponent of the pink noise
-        """
-        denom = self.fs ** (beta / 2.0)
-        denom[0] = 1
-        self.hs /= denom
-
-    def differentiate(self):
-        """Apply the differentiation filter.
-
-        returns: new Spectrum
-        """
-        new = self.copy()
-        new.hs *= PI2 * 1j * new.fs
-        return new
-
-    def integrate(self):
-        """Apply the integration filter.
-
-        returns: new Spectrum
-        """
-        new = self.copy()
-        zero = (new.fs == 0)
-        new.hs[~zero] /= PI2 * 1j * new.fs[~zero]
-        new.hs[zero] = np.inf
-        return new
-
-    def make_integrated_spectrum(self):
-        """Makes an integrated spectrum.
-        """
-        cs = np.cumsum(self.power)
-        cs /= cs[-1]
-        return IntegratedSpectrum(cs, self.fs)
-
     def make_wave(self):
         """Transforms to the time domain.
 
@@ -464,47 +224,6 @@ class Spectrum(_SpectrumParent):
         # time in the Spectrum
         # ts = self.start + np.arange(len(ys)) / self.framerate
         return Wave(ys, framerate=self.framerate)
-
-
-class Dct(_SpectrumParent):
-    """Represents the spectrum of a signal using discrete cosine transform."""
-
-    @property
-    def amps(self):
-        """Returns a sequence of amplitudes (read-only property).
-
-        Note: for DCTs, amps are positive or negative real.
-        """
-        return self.hs
-
-    def __add__(self, other):
-        """Adds two DCTs elementwise.
-
-        other: DCT
-
-        returns: new DCT
-        """
-        if other == 0:
-            return self
-
-        assert self.framerate == other.framerate
-        hs = self.hs + other.hs
-        return Dct(hs, self.fs, self.framerate)
-
-    __radd__ = __add__
-
-    def make_wave(self):
-        """Transforms to the time domain.
-
-        returns: Wave
-        """
-        N = len(self.hs)
-        ys = scipy.fftpack.idct(self.hs, type=2) / 2 / N
-        # NOTE: whatever the start time was, we lose it when
-        # we transform back
-        # ts = self.start + np.arange(len(ys)) / self.framerate
-        return Wave(ys, framerate=self.framerate)
-
 
 class Spectrogram:
     """Represents the spectrum of a signal."""
@@ -709,88 +428,6 @@ class Wave:
 
     __radd__ = __add__
 
-    def __or__(self, other):
-        """Concatenates two waves.
-
-        other: Wave
-
-        returns: new Wave
-        """
-        if self.framerate != other.framerate:
-            raise ValueError("Wave.__or__: framerates do not agree")
-
-        ys = np.concatenate((self.ys, other.ys))
-        # ts = np.arange(len(ys)) / self.framerate
-        return Wave(ys, framerate=self.framerate)
-
-    def __mul__(self, other):
-        """Multiplies two waves elementwise.
-
-        Note: this operation ignores the timestamps; the result
-        has the timestamps of self.
-
-        other: Wave
-
-        returns: new Wave
-        """
-        # the spectrums have to have the same framerate and duration
-        assert self.framerate == other.framerate
-        assert len(self) == len(other)
-
-        ys = self.ys * other.ys
-        return Wave(ys, self.ts, self.framerate)
-
-    def max_diff(self, other):
-        """Computes the maximum absolute difference between waves.
-
-        other: Wave
-
-        returns: float
-        """
-        assert self.framerate == other.framerate
-        assert len(self) == len(other)
-
-        ys = self.ys - other.ys
-        return np.max(np.abs(ys))
-
-    def convolve(self, other):
-        """Convolves two waves.
-
-        Note: this operation ignores the timestamps; the result
-        has the timestamps of self.
-
-        other: Wave or NumPy array
-
-        returns: Wave
-        """
-        if isinstance(other, Wave):
-            assert self.framerate == other.framerate
-            window = other.ys
-        else:
-            window = other
-
-        ys = np.convolve(self.ys, window, mode="full")
-        # ts = np.arange(len(ys)) / self.framerate
-        return Wave(ys, framerate=self.framerate)
-
-    def diff(self):
-        """Computes the difference between successive elements.
-
-        returns: new Wave
-        """
-        ys = np.diff(self.ys)
-        ts = self.ts[1:].copy()
-        return Wave(ys, ts, self.framerate)
-
-    def cumsum(self):
-        """Computes the cumulative sum of the elements.
-
-        returns: new Wave
-        """
-        ys = np.cumsum(self.ys)
-        ts = self.ts.copy()
-        return Wave(ys, ts, self.framerate)
-
     def quantize(self, bound, dtype):
         """Maps the waveform to quanta.
 
@@ -801,22 +438,6 @@ class Wave:
         """
         return quantize(self.ys, bound, dtype)
 
-    def apodize(self, denom=20, duration=0.1):
-        """Tapers the amplitude at the beginning and end of the signal.
-
-        Tapers either the given duration of time or the given
-        fraction of the total duration, whichever is less.
-
-        denom: float fraction of the segment to taper
-        duration: float duration of the taper in seconds
-        """
-        self.ys = apodize(self.ys, self.framerate, denom, duration)
-
-    def hamming(self):
-        """Apply a Hamming window to the wave.
-        """
-        self.ys *= np.hamming(len(self.ys))
-
     def window(self, window):
         """Apply a window to the wave.
 
@@ -824,78 +445,12 @@ class Wave:
         """
         self.ys *= window
 
-    def scale(self, factor):
-        """Multplies the wave by a factor.
-
-        factor: scale factor
-        """
-        self.ys *= factor
-
-    def shift(self, shift):
-        """Shifts the wave left or right in time.
-
-        shift: float time shift
-        """
-        # TODO: track down other uses of this function and check them
-        self.ts += shift
-
-    def roll(self, roll):
-        """Rolls this wave by the given number of locations.
-        """
-        self.ys = np.roll(self.ys, roll)
-
-    def truncate(self, n):
-        """Trims this wave to the given length.
-
-        n: integer index
-        """
-        self.ys = truncate(self.ys, n)
-        self.ts = truncate(self.ts, n)
-
-    def zero_pad(self, n):
-        """Trims this wave to the given length.
-
-        n: integer index
-        """
-        self.ys = zero_pad(self.ys, n)
-        self.ts = self.start + np.arange(n) / self.framerate
-
     def normalize(self, amp=1.0):
         """Normalizes the signal to the given amplitude.
 
         amp: float amplitude
         """
         self.ys = normalize(self.ys, amp=amp)
-
-    def unbias(self):
-        """Unbiases the signal.
-        """
-        self.ys = unbias(self.ys)
-
-    def find_index(self, t):
-        """Find the index corresponding to a given time."""
-        n = len(self)
-        start = self.start
-        end = self.end
-        i = round((n - 1) * (t - start) / (end - start))
-        return int(i)
-
-    def segment(self, start=None, duration=None):
-        """Extracts a segment.
-
-        start: float start time in seconds
-        duration: float duration in seconds
-
-        returns: Wave
-        """
-        if start is None:
-            start = self.ts[0]
-            i = 0
-        else:
-            i = self.find_index(start)
-
-        j = None if duration is None else self.find_index(start + duration)
-        return self.slice(i, j)
 
     def slice(self, i, j):
         """Makes a slice from a Wave.
@@ -906,7 +461,7 @@ class Wave:
         ys = self.ys[i:j].copy()
         ts = self.ts[i:j].copy()
         return Wave(ys, ts, self.framerate)
-
+    #
     def make_spectrum(self, full=False):
         """Computes the spectrum using FFT.
 
@@ -926,14 +481,6 @@ class Wave:
             fs = np.fft.rfftfreq(n, d)
 
         return Spectrum(hs, fs, self.framerate, full)
-
-    def make_dct(self):
-        """Computes the DCT of this wave.
-        """
-        N = len(self.ys)
-        hs = scipy.fftpack.dct(self.ys, type=2)
-        fs = (0.5 + np.arange(N)) / 2
-        return Dct(hs, fs, self.framerate)
 
     def make_spectrogram(self, seg_length, win_flag=True):
         """Computes the spectrogram of the wave.
@@ -972,7 +519,7 @@ class Wave:
         except KeyError:
             xfactor = 1
         return xfactor
-
+    #
     def plot(self, **options):
         """Plots the wave.
 
@@ -988,61 +535,6 @@ class Wave:
         """
         xfactor = self.get_xfactor(options)
         plt.vlines(self.ts * xfactor, 0, self.ys, **options)
-
-    def corr(self, other):
-        """Correlation coefficient two waves.
-
-        other: Wave
-
-        returns: float coefficient of correlation
-        """
-        corr = np.corrcoef(self.ys, other.ys)[0, 1]
-        return corr
-
-    def cov_mat(self, other):
-        """Covariance matrix of two waves.
-
-        other: Wave
-
-        returns: 2x2 covariance matrix
-        """
-        return np.cov(self.ys, other.ys)
-
-    def cov(self, other):
-        """Covariance of two unbiased waves.
-
-        other: Wave
-
-        returns: float
-        """
-        total = sum(self.ys * other.ys) / len(self.ys)
-        return total
-
-    def cos_cov(self, k):
-        """Covariance with a cosine signal.
-
-        freq: freq of the cosine signal in Hz
-
-        returns: float covariance
-        """
-        n = len(self.ys)
-        factor = math.pi * k / n
-        ys = [math.cos(factor * (i + 0.5)) for i in range(n)]
-        total = 2 * sum(self.ys * ys)
-        return total
-
-    def cos_transform(self):
-        """Discrete cosine transform.
-
-        returns: list of frequency, cov pairs
-        """
-        n = len(self.ys)
-        res = []
-        for k in range(n):
-            cov = self.cos_cov(k)
-            res.append((k, cov))
-
-        return res
 
     def write(self, filename="sound.wav"):
         """Write a wave file.
@@ -1197,3 +689,20 @@ def CosSignal(freq=440, amp=1.0, offset=0):
     returns: Sinusoid object
     """
     return Sinusoid(freq, amp, offset, func=np.cos)
+
+
+def underride(d, **options):
+    """Add key-value pairs to d only if key is not in d.
+
+    If d is None, create a new dictionary.
+
+    d: dictionary
+    options: keyword args to add to d
+    """
+    if d is None:
+        d = {}
+
+    for key, val in options.items():
+        d.setdefault(key, val)
+
+    return d
