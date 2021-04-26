@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
      name='sonipy',
-     version='1.0',
+     version='1.1',
      author='Locke Patton',
      author_email='locke.patton@cfa.harvard.edu',
      description='Sonification of 2D plots',
