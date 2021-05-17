@@ -10,18 +10,18 @@ give or receive advice.
 This project is a cross-over between github, python code development and BVI
 (blind and/or visually impaired) accessibility. If you have feedback or ideas,
 please reach out! Send Locke an email at locke.patton@cfa.harvard.edu, or open
-an issue on `sonipy`!
+an issue on `soni-py`!
 
 # Contributing - some basics to get you started
 
 [Here](https://guides.github.com/activities/hello-world/) is a github basics tutorial.
 
-First you will want to fork `sonipy` which creates your own copy of the complete code on github that
+First you will want to fork `soni-py` which creates your own copy of the complete code on github that
 won't update until you specifically make changes to it. This way you can make independent changes
 to your version of the code, without affecting everyone. To fork, click the "fork" button
-on the top right of the homepage of `sonipy`.
+on the top right of the homepage of `soni-py`.
 
-Next clone your copy of `sonipy`. This copies all the files to your local machine.
+Next clone your copy of `soni-py`. This copies all the files to your local machine.
 You will want to work from command line or terminal to run these commands.
 
 ``` bash
