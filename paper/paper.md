@@ -1,5 +1,5 @@
 ---
-title: 'Pysonic: A Pitch-Based Sonification Package'
+title: 'soni-py: A Pitch-Based Sonification Package'
 tags:
   - Python
   - Sonification
@@ -24,7 +24,7 @@ bibliography: paper.bib
 
 # Introduction
 
-`Pysonic` moves beyond visual analyses by sonifying scatter-plot data, producing audio files that depict variations in y as perceptually uniform changes in pitch. Short tones - called blips - are sounded in time at intervals corresponding to x values.
+`soni-py` moves beyond visual analyses by sonifying scatter-plot data, producing audio files that depict variations in y as perceptually uniform changes in pitch. Short tones - called blips - are sounded in time at intervals corresponding to x values.
 
 The addition of this audio sonification to a scientist's toolset has the intention of creating more inclusive and accessible science, new attention grabbing public outreach opportunities, and an easier self-consistent scientific understanding of minor differences in data over large scales.
 
@@ -40,7 +40,7 @@ With these parameters, xy scatterplot data can be translated into audio files th
 
 # Scientific Need
 
-This `Pysonic` code is specifically designed to create an open-access scientifically useful method to listen to data, with accuracy and use on par with reading plots visually. While many sonification tools exist, this was specifically designed in collaboration with the University of Washington Speech and Hearing Sciences to guarantee that a linear increase in y value will correspond to a uniform increase in perceived “pitch”. This means that while frequency varies non linearly, the user is listening to data in a uniformly perceived way - a linear plot sounds like a linear sweep in pitch. The guarantees the user self consistency when translating from a visual medium to an audio medium. Furthermore, this technique allows us to probe smaller difference in y values than we can discern visually. We’ve also found that we can hear periodic details in data that are not easily visually discerned from a plot alone.
+This `soni-py` code is specifically designed to create an open-access scientifically useful method to listen to data, with accuracy and use on par with reading plots visually. While many sonification tools exist, this was specifically designed in collaboration with the University of Washington Speech and Hearing Sciences to guarantee that a linear increase in y value will correspond to a uniform increase in perceived “pitch”. This means that while frequency varies non linearly, the user is listening to data in a uniformly perceived way - a linear plot sounds like a linear sweep in pitch. The guarantees the user self consistency when translating from a visual medium to an audio medium. Furthermore, this technique allows us to probe smaller difference in y values than we can discern visually. We’ve also found that we can hear periodic details in data that are not easily visually discerned from a plot alone.
 
 Thanks to the nature of human hearing, we can audibly discern subsequent pitch differences of 10 cents (a logarithmic measure of pitch interval). On a y scale ranging from 0 to 10, that corresponds to hearing variations as small as dy~0.03 - a number which rivals our visual perceptions of scatter plot detail. This simultaneous depth and range makes pitch-varied audio an incredibly powerful and accessible tool for understanding nuances in data. This approach also opens up science and citizen science to participants who are visually impaired, and empowers blind and visually impaired (BVI) individuals to explore their own data.
 

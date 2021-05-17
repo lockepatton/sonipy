@@ -1,4 +1,4 @@
-# `sonipy` : A Scatterplot Sonification Package
+# `soni-py` : A Scatterplot Sonification Package
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/lockepatton/sonipy/blob/master/LICENSE.txt)
 [![nbviewer](https://img.shields.io/badge/jupyter%20notebooks-nbviewer-blue)](https://nbviewer.jupyter.org/github/lockepatton/sonipy/blob/master/demos/Tutorial.ipynb)
@@ -10,19 +10,19 @@ A package to turn scatter plots into perceptually uniform sound files for use in
 
 This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque). Click [here](https://twitter.com/Astro_Locke/status/1083510515857408000) for a twitter thread explaining the motivation behind this project.
 
-## What does `sonipy` do?
+## What does `soni-py` do?
 
 Here is an [example sonification](https://twitter.com/Astro_Locke/status/1083510562187751424).
 
 Our method of sonification takes in scatterplot data and produces audio clips that depict each datapoint as a short sound blip with a y value corresponding to pitch and an x value corresponding to arrival time.
 
-![sonipy setup](./paper/images/Method2.png)
+![soni-py setup](./paper/images/Method2.png)
 
 **Each data point has a corresponding short tone called a `blip`,** with a y value corresponding to its pitch and a x value corresponding to its arrival time. Higher y value data points have higher corresponding blip pitches.
 
 ## Installation
 
-`sonipy` is pip-installable from command line, as follows:
+`soni-py` is pip-installable from command line, as follows:
 
 ``` bash
 pip install sonipy
