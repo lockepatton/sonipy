@@ -6,7 +6,7 @@
 [![Documentation Status](https://readthedocs.org/projects/sonipy/badge/?version=latest)](https://sonipy.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://api.travis-ci.org/lockepatton/sonipy.png?branch=master)](https://travis-ci.org/github/lockepatton/sonipy)
 
-A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible.
+A package to turn scatter plots into perceptually uniform sound files for use in science and to make science more accessible. This package should not be confused with `SoniPy` a sonification python module package by David Warrall, which can be found [here](http://www.sonification.com.au/sonipy/index.html).
 
 This project was developed by [Locke Patton](https://twitter.com/Astro_Locke) and [Prof. Emily Levesque](https://twitter.com/emsque). Click [here](https://twitter.com/Astro_Locke/status/1083510515857408000) for a twitter thread explaining the motivation behind this project.
 
