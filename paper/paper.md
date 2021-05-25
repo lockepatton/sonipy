@@ -24,7 +24,9 @@ bibliography: paper.bib
 
 # Introduction
 
-`Sonipy` moves beyond visual analyses by sonifying scatter-plot data, producing audio files that depict variations in y as perceptually uniform changes in pitch. Short tones - called blips - are sounded in time at intervals corresponding to x values. We built this code to open up science to participants who are visually impaired, creating scientifically useful and distinguishable sonifications of scatterplot data.
+`soni-py` moves beyond visual analyses by sonifying scatter-plot data, producing audio files that depict variations in y as perceptually uniform changes in pitch. Short tones - called blips - are sounded in time at intervals corresponding to x values.
+
+The addition of this audio sonification to a scientist's toolset has the intention of creating more inclusive and accessible science, new attention grabbing public outreach opportunities, and an easier self-consistent scientific understanding of minor differences in data over large scales.
 
 ## Understanding pitch
 
@@ -36,11 +38,21 @@ The average person is capable of discerning independent subsequent pitches with 
 
 With these parameters, xy scatterplot data can be translated into audio files that map y values to specific pitch frequencies, with the minimum discernible $\Delta y$ corresponding to a 10 cent pitch difference.
 
-# The Case for Sonification: Why sonify lightcurves?
+# Scientific Need
 
-Thanks to the nature of human hearing, we can audibly discern subsequent pitch differences of 10 cents. On a y scale ranging from 0 to 10, that corresponds to hearing variations as small as $\Delta y\sim0.03$. This simultaneous depth and range makes pitch-varied audio an incredibly powerful and accessible tool for understanding nuances in data. Through our sonification efforts of astronomical data we have found that listeners can discern differences in the brightness, duration, and period of time-domain variations when the changes in brightness are expressed as changes in pitch.
+This `soni-py` code is specifically designed to create an open-access scientifically useful method to listen to data, with accuracy and use on par with reading plots visually. While many sonification tools exist, this was specifically designed in collaboration with the University of Washington Speech and Hearing Sciences to guarantee that a linear increase in y value will correspond to a uniform increase in perceived “pitch”. This means that while frequency varies non linearly, the user is listening to data in a uniformly perceived way - a linear plot sounds like a linear sweep in pitch. The guarantees the user self consistency when translating from a visual medium to an audio medium. Furthermore, this technique allows us to probe smaller difference in y values than we can discern visually. We’ve also found that we can hear periodic details in data that are not easily visually discerned from a plot alone.
 
-This approach also opens up science and citizen science to participants who are visually impaired, and empowers blind and visually impaired (BVI) individuals to explore their own data.
+Thanks to the nature of human hearing, we can audibly discern subsequent pitch differences of 10 cents (a logarithmic measure of pitch interval). On a y scale ranging from 0 to 10, that corresponds to hearing variations as small as dy~0.03 - a number which rivals our visual perceptions of scatter plot detail. This simultaneous depth and range makes pitch-varied audio an incredibly powerful and accessible tool for understanding nuances in data. This approach also opens up science and citizen science to participants who are visually impaired, and empowers blind and visually impaired (BVI) individuals to explore their own data.
+
+In fact, this code was specifically designed for this use case. Already it’s been used by students at Perkin’s School for the Blind, a semester Ohio State Astronomy Program for BVI high school students, and is the foundation for our NSF-funded TransientZoo project, a citizen science program that will allow participants, including BVI individuals, to classify astronomical supernova lightcurves using sound.
+
+
+# State of the Field
+
+Sonification of scientific data has a long history of precedent. The most relevant projects have been completed by SYSTEM Sounds, run by Matt Russo, with the intent of public astronomy outreach through sonifications. He and his team have used various sonic methods to produce auditory experiences of data, ranging from an exoplanet period correlated with musical beats to a scan across pictures of Saturn's ring matching image components to pitch and volume. Most similar to our work is his sonification of a Hubble image of a galaxy cluster - time flows from left to right across the image while the frequency of sound changes from bottom to top of the image; the brightness at any point correlates with loudness. Other works that sonify supernovae have been completed by Alicia Soderberg and Raffaella Margutti, matching different musical instrument sounds to different wavelength regimes and correlating the brightness of an object with pitch or loudness. In the field of astronomy more generally, the LIGO collaboration famously produces sound files mapping a 2D histogram of a black hole merger's gravitational wave signal to pitch and matching gravitational wave frequency to sound frequency (creating the distinctive upward ``chip" sound now associated with gravitational wave mergers).
+
+However, with all of these sonification tools the purpose of the sound is to communicate science rather than to aurally analyze the data or increase research accessibility. Our code implements a sonification method that is perceptually consistent (using scientific measures of pitch perception rather than harder-to-discern variations such as loudness). This allows users to reliably analyze scatter plots by listening to them, making this the first sonification tool suitable for scientific research. Future data sonification codes in astronomy, such as `astronify`, are already building upon our core method, and potential applications in the field include collaborations with large survey projects in astronomy such as the Zwicky Transient Facility and the Vera C. Rubin Observatory.
+
 
 # Our Sonification Technique
 
@@ -87,44 +99,6 @@ Our method is tailored to the capabilities of the human ear and audio equipment.
 
 We avoid methods that match changes in y to decibels, because human perception of loudness is inconsistent across users and not a perceptually uniform space. As our method is tailored to a science case, a linear increase in y corresponds to a perceptually uniform and linear increase in perceived pitch.
 
-# The Code
-
-The user has the power to adjust the frequency scale, the time length of the blips, and the duration of the sound file.
-
-**Frequency scale:** Frequency is set by one of the following: a frequency minimum and maximum, or a frequency maximum and a cents / y value scale value. All frequency parameters are entered inside the frequency\_args parameter, as seen below.
-
-**Blip length:** The time length of the blips in seconds can also be set. By default this is set to 0.5 seconds.
-
-**Sound file duration:** Duration is set by a total time, a duration scale (in seconds / x value), or by choosing the length of minimum or maximum time difference between datapoints. Time parameters are entered simply by defining a duration\_scale (in seconds per x value). Or alternately by passing a duration\_args dictionary with some total time, smallest delta time between points or max delta time between points, as seen in the code below.
-
-We advise a frequency scale set between middle C (C4) and four times the frequency of C4, a typical blip length of 0.5 seconds, and a total sound file duration between 1 and 3 seconds (longer sound files, played subsequently, are difficult for listeners to directly compare). Most humans can discern $\sim$10 cents difference in pitch. Keep this in mind when defining a your cents\_per\_value parameter value for $\frac{dc}{dy}$. Furthermore, we recommend creating a test linear sound file to be sure all your chosen parameters work well with your headphones and hearing.
-
-```python
-from sonify import *
-
-C4 = 261.6 # Hz
-frequency_args = {
-  'frequency_min' : C4,
-  'frequency_max' : C4*4
-  # 'cents_per_value' : -680,
-  # 'value_min' : 0,
-  # 'value_max' : 1,
-}
-
-duration_args = {
-  'time_total' : 2,
-  # 'time_min' : None,
-  # 'time_max' : None,
-}
-duration_scale = None
-
-SN = SonifyTool(values=x, durations=y,
-                frequency_args = frequency_args,
-                duration_args = duration_args,
-                # duration_scale = duration_scale,
-                length=0.5)
-SN.SaveTone()
-```
 
 # Our Astronomy Case Study
 

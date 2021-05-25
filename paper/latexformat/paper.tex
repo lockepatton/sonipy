@@ -70,9 +70,9 @@
 % \setlength{\parindent}{4em}
 \setlength{\parskip}{0.5em}
 
-\title{\texttt{sonipy}: A Perceptually Uniform Sonification Package}
+\title{\texttt{soni-py}: A Pitch-based Data Sonification Package}
 
-\author{Locke Patton \textsuperscript{123}, Emily Levesque \textsuperscript{14}}
+\author{Locke Patton \textsuperscript{1,2}, Emily Levesque \textsuperscript{1}}
 % \pdfauthor{Richard Southern}
 
 \keywords{sonification}
@@ -104,7 +104,15 @@
 
 \section{Introduction} \label{sec:introduction}
 
-\texttt{Sonipy} moves beyond visual analyses by sonifying scatter-plot data, producing audio files that depict variations in y as perceptually uniform changes in pitch. Short tones - called blips - are sounded in time at intervals corresponding to x values.
+\texttt{soni-py} moves beyond visual analyses by sonifying scatter-plot data, producing audio files that depict variations in y as perceptually uniform changes in pitch. Short tones - called blips - are sounded in time at intervals corresponding to x values.
+
+The addition of this audio sonification to a scientist's toolset has the intention of creating more inclusive and accessible science, new attention grabbing public outreach opportunities, and an easier self-consistent scientific understanding of minor differences in data over large scales.
+
+% The guarantees the user self consistency when translating from a visual medium to an audio medium. 
+
+% The addition of audio light curves might allow for more inclusive science, viral public outreach, as well as a better scientific understanding of the minor differences in objects. - benjamin rose
+
+% This specific case misses most of the examples in the JOSS documentation. However, I feel like this project could have a major impact on the field. In the study of odd astrophysical transients, a field that will see exponential growth in the next decade, light curve comparisons are the main scientific figure. This project has the potential to add audio “light curves” with fewer lines of code than you typically use to reformat a default matplotlib figure. The addition of audio light curves might allow for more inclusive science, viral public outreach, as well as a better scientific understanding of the minor differences in objects.
 
 \subsection{Understanding pitch}
 The cent is a logarithmic unit of measure for pitch intervals where $n \approx 3986\log(b/a)$ defines the number of cents between the pitch frequencies a and b.
@@ -114,16 +122,43 @@ The average person is capable of discerning independent subsequent pitches with 
 
 With these parameters, xy scatterplot data can be translated into audio files that map y values to specific pitch frequencies, with the minimum discernible $\Delta y$ corresponding to a 10 cent pitch difference.
 
-\section{The Case for Sonification}
+% \section{The Case for Sonification}
 
 %\subsection{Why sonify lightcurves?}
 
-Thanks to the nature of human hearing, we can audibly discern subsequent pitch differences of 10 cents. On a y scale ranging from 0 to 10, that corresponds to hearing variations as small as $\Delta y\sim0.03$. This simultaneous depth and range makes pitch-varied audio an incredibly powerful and accessible tool for understanding nuances in data. Through our sonification efforts of astronomical data we have found that listeners can discern differences in the brightness, duration, and period of time-domain variations when the changes in brightness are expressed as changes in pitch.
+% Thanks to the nature of human hearing, we can audibly discern subsequent pitch differences of 10 cents. On a y scale ranging from 0 to 10, that corresponds to hearing variations as small as $\Delta y\sim0.03$. This simultaneous depth and range makes pitch-varied audio an incredibly powerful and accessible tool for understanding nuances in data. Through our sonification efforts of astronomical data we have found that listeners can discern differences in the brightness, duration, and period of time-domain variations when the changes in brightness are expressed as changes in pitch.
 
 %Furthermore, through our sonification efforts of periodically variable astronomy sources, we have generally found that periodicity can be discerned in our sonified data. For an example of this behavior in a sonification,  see the fast period eclipsing binary whose brightness is plotted against time in Figure \ref{ADDEXTRAEBFIG}.
 %Note: This is *awesome* but let's be super-precise with the language. What we'd ideally like to be able to say is "there's periodicity there that our eye canNOT see but but our ears CAN hear, and computers prove us right". In short, we think we hear a period or pattern that we can't see, and computers then prove us right (because if we think we hear a period that isn't really there, that's not good!) Do we have a particular example of this? (if we don't that's actually fine; the paper doesn't rest on this claim! It's more that if we want to make it we want it to be solid)
 
-This approach also opens up science and citizen science to participants who are visually impaired, and empowers blind and visually impaired (BVI) individuals to explore their own data.
+% This approach also opens up science and citizen science to participants who are visually impaired, and empowers blind and visually impaired (BVI) individuals to explore their own data.
+
+\section{Scientific Need}
+
+This \texttt{soni-py} code is specifically designed to create an open-access scientifically useful method to listen to data, with accuracy and use on par with reading plots visually. While many sonification tools exist, this was specifically designed in collaboration with the University of Washington Speech and Hearing Sciences to guarantee that a linear increase in y value will correspond to a uniform increase in perceived “pitch”. This means that while frequency varies non linearly, the user is listening to data in a uniformly perceived way - a linear plot sounds like a linear sweep in pitch. The guarantees the user self consistency when translating from a visual medium to an audio medium. Furthermore, this technique allows us to probe smaller difference in y values than we can discern visually. We’ve also found that we can hear periodic details in data that are not easily visually discerned from a plot alone.
+
+Thanks to the nature of human hearing, we can audibly discern subsequent pitch differences of 10 cents (a logarithmic measure of pitch interval). On a y scale ranging from 0 to 10, that corresponds to hearing variations as small as dy~0.03 - a number which rivals our visual perceptions of scatter plot detail. This simultaneous depth and range makes pitch-varied audio an incredibly powerful and accessible tool for understanding nuances in data. This approach also opens up science and citizen science to participants who are visually impaired, and empowers blind and visually impaired (BVI) individuals to explore their own data.
+
+In fact, this code was specifically designed for this use case. Already it’s been used by students at Perkin’s School for the Blind, a semester Ohio State Astronomy Program for BVI high school students, and is the foundation for our NSF-funded TransientZoo project, a citizen science program that will allow participants, including BVI individuals, to classify astronomical supernova lightcurves using sound.
+
+\section{State of the Field}
+
+%  TO DO
+% - incorporate citations?
+
+Sonification of scientific data has a long history of precedent. The most relevant projects have been completed by SYSTEM Sounds, run by Matt Russo, with the intent of public astronomy outreach through sonifications. He and his team have used various sonic methods to produce auditory experiences of data, ranging from an exoplanet period correlated with musical beats to a scan across pictures of Saturn's ring matching image components to pitch and volume. Most similar to our work is his sonification of a Hubble image of a galaxy cluster - time flows from left to right across the image while the frequency of sound changes from bottom to top of the image; the brightness at any point correlates with loudness. Other works that sonify supernovae have been completed by Alicia Soderberg and Raffaella Margutti, matching different musical instrument sounds to different wavelength regimes and correlating the brightness of an object with pitch or loudness. In the field of astronomy more generally, the LIGO collaboration famously produces sound files mapping a 2D histogram of a black hole merger's gravitational wave signal to pitch and matching gravitational wave frequency to sound frequency (creating the distinctive upward ``chip" sound now associated with gravitational wave mergers).
+
+However, with all of these sonification tools the purpose of the sound is to communicate science rather than to aurally analyze the data or increase research accessibility. Our code implements a sonification method that is perceptually consistent (using scientific measures of pitch perception rather than harder-to-discern variations such as loudness). This allows users to reliably analyze scatter plots by listening to them, making this the first sonification tool suitable for scientific research. Future data sonification codes in astronomy, such as \texttt{astronify}, are already building upon our core method, and potential applications in the field include collaborations with large survey projects in astronomy such as the Zwicky Transient Facility and the Vera C. Rubin Observatory.
+
+
+% The data sonification project is led by the Chandra X-ray Center (CXC) as part of the NASA's Universe of Learning (UoL) program. NASA's Science Activation program strives to enable NASA science experts and to incorporate NASA science content into the learning environment effectively and efficiently for learners of all ages. The collaboration was driven by visualization scientist Kimberly Arcand (CXC), astrophysicist Matt Russo and musician Andrew Santaguida (both of the SYSTEMS Sound project.)
+
+
+
+
+% The two codes that you linked above - @faroit - are both very interesting but distinct sonification cases. In emailing with @david-worrall, the author of the other code “sonipy”, it’s clear that their code is more an awesome cumulation of interface codes. While a potentially cool idea in the future to connect this sonipy with their infrastructure to connect more with the field of sonification, this code is most useful and accessible to BVI students as already designed and implemented. It’s a tool designed to be plugged into various science disciplines (in fields otherwise unfamiliar with sonification) and thus fits well without a complete sonification library.
+
+% The second code interactive-sonification is awesome and designed for interactive audio processing. Our code is specifically designed non-interactively; while it uses audio processing, it uses thinkDSP as the audio processing tool. Our code does the work of designing a perceptually uniform sonification for accurate use in listening to science plots. We specially built this tool as there was no other sonification that filled this use.
 
 \section{Our Sonification Technique}
 
@@ -174,48 +209,49 @@ Each datapoint corresponds to a tone blip at a frequency specified by its y valu
 
 Our method is tailored to the capabilities of the human ear and audio equipment. It is flexible, applies to a broad variety of data inputs, is fast to generate, and offers a unique means of classifying data.
 
-We avoid methods that match changes in y to decibels, because human perception of loudness is inconsistent across users and not a perceptually uniform space. As our method is tailored to a science case, a linear increase in y corresponds to a perceptually uniform and linear increase in perceived pitch.
+We avoid methods that match changes in y to decibels, because human perception of loudness is inconsistent across users and not a perceptually consistent space. As our method is tailored to a science case, a linear increase in y corresponds to a perceptually consistent and linear increase in perceived pitch.
 
-\section{The Code}
+% \section{The Code}
 
-The user has the power to adjust the frequency scale, the time length of the blips, and the duration of the sound file.
+% The user has the power to adjust the frequency scale, the time length of the blips, and the duration of the sound file.
 
-\textbf{Frequency scale:} Frequency is set by one of the following: a frequency minimum and maximum, or a frequency maximum and a cents / y value scale value. All frequency parameters are entered inside the frequency\_args parameter, as seen below.
+% \textbf{Frequency scale:} Frequency is set by one of the following: a frequency minimum and maximum, or a frequency maximum and a cents / y value scale value. All frequency parameters are entered inside the frequency\_args parameter, as seen below.
 
-\textbf{Blip length:} The time length of the blips in seconds can also be set. By default this is set to 0.5 seconds.
+% \textbf{Blip length:} The time length of the blips in seconds can also be set. By default this is set to 0.5 seconds.
 
-\textbf{Sound file duration:} Duration is set by a total time, a duration scale (in seconds / x value), or by choosing the length of minimum or maximum time difference between datapoints. Time parameters are entered simply by defining a duration\_scale (in seconds per x value). Or alternately by passing a duration\_args dictionary with some total time, smallest delta time between points or max delta time between points, as seen in the code below.
+% \textbf{Sound file duration:} Duration is set by a total time, a duration scale (in seconds / x value), or by choosing the length of minimum or maximum time difference between datapoints. Time parameters are entered simply by defining a duration\_scale (in seconds per x value). Or alternately by passing a duration\_args dictionary with some total time, smallest delta time between points or max delta time between points, as seen in the code below.
 
 
-We advise a frequency scale set between middle C (C4) and four times the frequency of C4, a typical blip length of 0.5 seconds, and a total sound file duration between 1 and 3 seconds (longer sound files, played subsequently, are difficult for listeners to directly compare). Most humans can discern $\sim$10 cents difference in pitch. Keep this in mind when defining a your cents\_per\_value parameter value for $\frac{dc}{dy}$. Furthermore, we recommend creating a test linear sound file to be sure all your chosen parameters work well with your headphones and hearing.
+% We advise a frequency scale set between middle C (C4) and four times the frequency of C4, a typical blip length of 0.5 seconds, and a total sound file duration between 1 and 3 seconds (longer sound files, played subsequently, are difficult for listeners to directly compare). Most humans can discern $\sim$10 cents difference in pitch. Keep this in mind when defining a your cents\_per\_value parameter value for $\frac{dc}{dy}$. Furthermore, we recommend creating a test linear sound file to be sure all your chosen parameters work well with your headphones and hearing.
 
-\vspace{-1.25\baselineskip}
-\begin{lstlisting}[language=Python, frame=lines,label={lst:code_direct}, caption={Example Code Setup.}, basicstyle=\footnotesize]
-from sonify import *
+% \vspace{-1.25\baselineskip}
+% \begin{lstlisting}[language=Python, frame=lines,label={lst:code_direct}, caption={Example Code Setup.}, basicstyle=\footnotesize]
+% from sonify import *
 
-C4 = 261.6 # Hz
-frequency_args = {
-  'frequency_min' : C4,
-  'frequency_max' : C4*4
-  # 'cents_per_value' : -680,
-  # 'value_min' : 0,
-  # 'value_max' : 1,
-}
+% C4 = 261.6 # Hz
+% frequency_args = {
+%   'frequency_min' : C4,
+%   'frequency_max' : C4*4
+%   # 'cents_per_value' : -680,
+%   # 'value_min' : 0,
+%   # 'value_max' : 1,
+% }
 
-duration_args = {
-  'time_total' : 2,
-  # 'time_min' : None,
-  # 'time_max' : None,
-}
-duration_scale = None
+% duration_args = {
+%   'time_total' : 2,
+%   # 'time_min' : None,
+%   # 'time_max' : None,
+% }
+% duration_scale = None
 
-SN = SonifyTool(values=x, durations=y,
-                frequency_args = frequency_args,
-                duration_args = duration_args,
-                # duration_scale = duration_scale,
-                length=0.5)
-SN.SaveTone()
-\end{lstlisting}
+% SN = SonifyTool(values=x, durations=y,
+%                 frequency_args = frequency_args,
+%                 duration_args = duration_args,
+%                 # duration_scale = duration_scale,
+%                 length=0.5)
+% SN.SaveTone()
+% \end{lstlisting}
+
 
 \section{Our Astronomy Case Study}
 \subsection{Citizen Science - Supernova Lightcurves}
