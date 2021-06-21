@@ -1,4 +1,4 @@
-# `sonipy` tests
+# `soni-py` tests
 
 To run tests, start by installing nose2:
 
@@ -6,4 +6,4 @@ To run tests, start by installing nose2:
 pip install nose2
 ```
 
-With sonipy installed, run nose2 in the home directory of your sonipy repo.
+With soni-py installed, run nose2 in the home directory of your soni-py repo.
