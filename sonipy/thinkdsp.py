@@ -281,7 +281,7 @@ class Spectrogram:
 
         # make the array
         size = len(fs), len(ts)
-        array = np.zeros(size, dtype=np.float)
+        array = np.zeros(size, dtype=float)
 
         # copy amplitude from each spectrum into a column of the array
         for j, t in enumerate(ts):
@@ -303,7 +303,7 @@ class Spectrogram:
 
         # make the array
         size = len(fs), len(ts)
-        array = np.zeros(size, dtype=np.float)
+        array = np.zeros(size, dtype=float)
 
         # copy amplitude from each spectrum into a column of the array
         for j, t in enumerate(ts):
