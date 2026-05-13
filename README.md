@@ -114,7 +114,7 @@ Thank you to Prof. Allen Downey for permission to host his thinkDSP code in this
 
 Work on this project is welcomed. For more information on contributing, see our [contributing.md guidelines](https://github.com/lockepatton/sonipy/blob/master/contributing.md).
 
-Have an issue with your operating system or any other suggestions/improvements? Let us know by opening an issue! Have a suggestion for how to make this code more accessible? Send Locke an email at locke.patton@cfa.harvard.edu or reach out via a github issue.
+Have an issue with your operating system or any other suggestions/improvements? Let us know by opening an issue! Have a suggestion for how to make this code more accessible? Send Locke an email at lpatton@mos.org or reach out via a github issue.
 
 ## Attribution
 
